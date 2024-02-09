@@ -8,23 +8,8 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-const sidebarLinks = [
-    {
-        imgURL: "/assets/icons/home.svg",
-        route: "/",
-        label: "Home",
-    },
-    {
-        imgURL: "/assets/icons/users.svg",
-        route: "/community",
-        label: "Community",
-    },
-    {
-        imgURL: "/assets/icons/star.svg",
-        route: "/collection",
-        label: "Collections",
-    },
-]
+import {sidebarLinks} from "@/constant/constant";
+
 const NavContent = () => {
     const pathname = usePathname();
     return (

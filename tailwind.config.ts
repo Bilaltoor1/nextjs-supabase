@@ -53,6 +53,8 @@ const config: Config = {
       backgroundImage: {
         "auth-dark": "url('/assets/images/auth-dark.png')",
         "auth-light": "url('/assets/images/auth-light.png')",
+        "graident-dark":
+            "radial-gradient(76.33% 76.59% at 50.15% 6.06%, #1A1A1A 0%, rgba(26, 26, 26, 0.38) 100%)",
       },
       screens: {
         xs: "420px",

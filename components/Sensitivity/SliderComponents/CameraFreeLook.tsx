@@ -7,23 +7,44 @@ export default function CameraFreeLook({sensitivity} : any) {
             <h2 className='h3-bold mb-3'>Camera ( Free Look )</h2>
             {/* SLIDER AND TEXT CONTAINER */}
             <div className='flex flex-wrap  md:flex-row flex-col  gap-5 space-x-6'>
-                {
-                    sensitivity.map((item : any)=> (
-                        <div className='flex flex-col md:w-[400px] w-[300px] ml-6' key={item.scope}>
-                            {/*NAME OF THE SITTING */}
-                            <div className='flex justify-between'>
-                                <p className='text-[13px] font'>{item.scope}</p> <p
-                                className='text-[13px] font-bold'>{item.sensitivity.camera}</p>
-                            </div>
-                            {/*SLIDER COMPONENT */}
-                            <div className='flex gap-2 items-center'>
-                                <span className='font-bold text-[18px]'>+</span>
-                                <Slider  value={[item.sensitivity.camera]} max={400} step={1}/>
-                                <span className='w-[10px] h-1 bg-black'></span>
-                            </div>
-                        </div>
-                    ))
-                }
+
+                <div className='flex flex-col md:w-[400px] w-[300px] ml-6'>
+                    {/*NAME OF THE SITTING */}
+                    <div className='flex justify-between'>
+                        <p className='text-[13px] font'>TPP (Character , Vehicle)</p> <p
+                        className='text-[13px] font-bold'>{sensitivity.freelook_camera_tpp}</p>
+                    </div>
+                    <div className='flex gap-2 items-center'>
+                        <span className='font-bold text-[18px]'>+</span>
+                        <Slider value={[sensitivity.freelook_camera_tpp]} max={400} step={1}/>
+                        <span className='w-[10px] h-1 bg-black'></span>
+                    </div>
+                </div>
+                <div className='flex flex-col md:w-[400px] w-[300px] ml-6'>
+                    {/*NAME OF THE SITTING */}
+                    <div className='flex justify-between'>
+                        <p className='text-[13px] font'>Camera (Parachuting)</p> <p
+                        className='text-[13px] font-bold'>{sensitivity.freelook_camera_parachuting}</p>
+                    </div>
+                    <div className='flex gap-2 items-center'>
+                        <span className='font-bold text-[18px]'>+</span>
+                        <Slider value={[sensitivity.freelook_camera_parachuting]} max={400} step={1}/>
+                        <span className='w-[10px] h-1 bg-black'></span>
+                    </div>
+                </div>
+                <div className='flex flex-col md:w-[400px] w-[300px] ml-6'>
+                    {/*NAME OF THE SITTING */}
+                    <div className='flex justify-between'>
+                        <p className='text-[13px] font'>FPP (character)</p> <p
+                        className='text-[13px] font-bold'>{sensitivity.freelook_camera_fpp_character}</p>
+                    </div>
+                    <div className='flex gap-2 items-center'>
+                        <span className='font-bold text-[18px]'>+</span>
+                        <Slider value={[sensitivity.freelook_camera_fpp_character]} max={400} step={1}/>
+                        <span className='w-[10px] h-1 bg-black'></span>
+                    </div>
+                </div>
+
             </div>
 
         </div>

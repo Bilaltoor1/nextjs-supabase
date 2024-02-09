@@ -7,7 +7,6 @@ const FilterHeader = () => {
     const HomePageFilters: any = [
         { name: "Newest", value: "newest" },
         { name: "oldest", value: "oldest" },
-        { name: "Recommended", value: "recommended" },
         {name : "Most viewed", value : "most-viewed"}
     ];
     const searchParams = useSearchParams();
@@ -47,7 +46,7 @@ const FilterHeader = () => {
         [active, router, searchParams]
     );
     return (
-        <div className="mt-2 hidden flex-wrap gap-3 md:flex">
+        <div className="mt-2 flex-wrap gap-3 flex max-md:justify-center">
             {HomePageFilters.map((item : any) => (
                 <Button
                     key={item.value}

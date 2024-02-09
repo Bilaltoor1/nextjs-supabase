@@ -10,7 +10,6 @@ import React, {useState} from 'react';
     }
 
 
-
     return (
         <div>
             <h1>HOME PAGE</h1>
@@ -22,7 +21,6 @@ import React, {useState} from 'react';
                     id="file_input" name="file_input" type="file" value={file}
                     onChange={(e) => setFile(e.target.value)}/>
                 <button type='submit'>Upload</button>
-
             </form>
         </div>
     );
