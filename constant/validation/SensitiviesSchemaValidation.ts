@@ -12,7 +12,7 @@ export const formSchema = z.object({
         message: "camera must be at least 2 characters.",
     }),
     slug: z.string().min(2, {
-        message: "slug must be at least 2 characters.",
+        message: "[slug] must be at least 2 characters.",
     }),
     screen_resolution: z.string().min(2, {
         message: "screen_resolution must be at least 2 characters.",

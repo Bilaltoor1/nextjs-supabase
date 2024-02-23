@@ -5,8 +5,7 @@ import {createServerClient} from "@supabase/ssr";
 import DashboardNavbar from "@/app/(admin)/components/dashboardNavbar/DashboardNavbar";
 
 
-
-async function DashboardLayout({children} : {children :  React.ReactNode}) {
+async function DashboardLayout({children}: { children: React.ReactNode }) {
     const cookieStore = cookies();
     const supabase = createServerClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -25,7 +24,6 @@ async function DashboardLayout({children} : {children :  React.ReactNode}) {
     }
     return (
         <html lang="en">
-
         <body>
         <main className="background-light850_dark100 relative">
             <DashboardNavbar/>

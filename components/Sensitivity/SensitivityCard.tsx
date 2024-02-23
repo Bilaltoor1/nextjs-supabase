@@ -6,13 +6,14 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import {Button} from "@/components/ui/button";
+import {Button} from "@/components/ui/Animated-button";
 import Image from "next/image";
 import {CheckCircledIcon, CrossCircledIcon} from '@radix-ui/react-icons'
 import Link from "next/link";
+import {setTimeout} from "node:timers/promises";
 
-function SensitivityCard({sensitivity_device} : any) {
-
+async function SensitivityCard({sensitivity_device} : any) {
+    await setTimeout(2000)
     return (
         <div className='flex flex-wrap gap-10 mt-10 max-md:justify-center max-md:items-center'>
             {
@@ -21,7 +22,7 @@ function SensitivityCard({sensitivity_device} : any) {
                           className="w-[320px] h-[420px] p-0 dark:border-gray-500  bg-gray-700 rounded-md bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-40 border border-gray-100">
                         <CardHeader className='p-0'>
                             <Image src={mobile?.thumbnail_url} alt="project" width={350} height={300}
-                                   className='w-full h-full min-h-[250px]  object-cover rounded-t-lg'/>
+                                   className='w-full h-[250px]  object-cover rounded-t-lg'/>
                         </CardHeader>
                         <CardContent>
                             <div className='flex gap-5 mt-4'>
@@ -36,9 +37,8 @@ function SensitivityCard({sensitivity_device} : any) {
                             </CardDescription>
                             <SensitivityAavailbility/>
                             <Link href={`/sensitivity/${mobile.slug}`}>
-                                <Button className='bg-amber-300 mt-4 font-spaceGrotesk text-[13px]'>Explore
-                                    Perfection
-                                </Button>
+                                <Button borderRadius='.5rem' containerClassName='w-36 mt-2.5' borderClassName=' dark:flex'   className='text-[13px] font-spaceGrotesk primary-gradient dark:dark-gradient text-white border-neutral-200 dark:border-slate-800'>Explore
+                                    Perfection</Button>
                             </Link>
                         </CardContent>
                     </Card>

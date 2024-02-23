@@ -1,3 +1,4 @@
+
 import React from "react";
 import {EyeOpenIcon, Pencil1Icon, TrashIcon} from "@radix-ui/react-icons";
 import {Button} from "@/components/ui/button";
@@ -6,13 +7,14 @@ import {updateSensitivityDeviceById} from "@/lib/actions/GetSensitivities.action
 import SwitchForm from "@/app/(admin)/components/DashboardMain/SwitchForm";
 import DeleteAlert from "@/app/(admin)/components/DashboardMain/DeleteAlert";
 import Image from "next/image";
+import Pagination from "@/components/pagination/pagination";
+import {setTimeout} from "node:timers/promises";
 
-
-export default function BlogTable({sensitivity_device, isNext}: { sensitivity_device: any, isNext: any }) {
-
+export default async function BlogTable({sensitivity_device, isNext , searchParams}: { sensitivity_device: any, isNext: any , searchParams : any}) {
     return (
-        <>
+        <div className=' space-y-10'>
             <div className="rounded-md dark:dark-gradient border-[0.5px] overflow-y-scroll ">
+
                 <div className="w-[800px] md:w-full">
                     <div className="grid grid-cols-5 border-b p-5 dark:text-gray-500">
                         <h1 className=" col-span-2">Title</h1>
@@ -52,7 +54,12 @@ export default function BlogTable({sensitivity_device, isNext}: { sensitivity_de
                     </div>
                 </div>
             </div>
-        </>
+            <Pagination pageNumber={
+                searchParams && searchParams.page
+                    ? +searchParams.page
+                    : 1
+            } isNext={isNext}/>
+        </div>
     );
 }
 

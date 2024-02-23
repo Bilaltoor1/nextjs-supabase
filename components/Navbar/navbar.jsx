@@ -6,7 +6,6 @@ import MobileNav from "./MobileNav";
 import GlobalSearch from "@/components/Navbar/GlobalSearch";
 import {createSupabaseBrowserClient} from "@/lib/supabase/BrowserClient";
 import ProfileWidge from "@/app/(admin)/components/dashboardNavbar/ProfileWidge";
-import Toggle from "@/components/DarkMode/Toggle";
 import DarkModeButton from "@/components/DarkMode/DarkModeButton";
 
 const Navbar = () => {
@@ -27,14 +26,19 @@ const Navbar = () => {
             className="flex-between background-light900_dark200 fixed z-50 w-full gap-5 p-6 shadow-light-300 sm:px-12 dark:shadow-none">
             <Link href="/" className="flex items-center gap-1">
                 <Image
-                    src="/assets/images/site-logo.svg"
-                    width={23}
-                    height={23}
+                    src="/assets/images/logo-dark.svg"
+                    width={140}
+                    height={80}
                     alt="DevFlow"
+                    className='hidden dark:flex'
                 />
-                <p className="h2-bold font-spaceGrotesk text-dark-100 max-sm:hidden dark:text-light-900">
-                    Gam<span className="text-primary-500">ify</span>
-                </p>
+                <Image
+                    src="/assets/images/logo-light.svg"
+                    width={140}
+                    height={80}
+                    alt="DevFlow"
+                    className='flex dark:hidden'
+                />
             </Link>
             <GlobalSearch/>
             <div className="flex-between gap-5">

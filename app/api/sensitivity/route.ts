@@ -10,13 +10,48 @@ export async function POST(request: Request) {
     return NextResponse.json('response')
 }
 
-export async function GET(request: Request) {
-    // const cookieStore = cookies();
+export async function GET(request: Request,context: any) {
+    let response;
+    console.log(context)
     const supabase = supabaseServerClient();
+    const {searchParams} = new URL(request.url);
+    const searchQuery = searchParams.get("q") || "";
+    const page = parseInt(searchParams.get("page") || '1');
+    const pageSize = parseInt(searchParams.get("pageSize") || '2');
+    const filter = searchParams.get("filter") || '';
+    let query = supabase
+        .from('sensitivity_device')
+        .select('*')
+        .range((page - 1) * pageSize, page * pageSize - 1);
+    if (searchQuery) {
+        query.ilike('device_name', `%${searchQuery}%`);
+    }
 
-    const response = await supabase.from("sensitivity_device").select('* , sensitivities(*) , comments(*)')
+    switch (filter) {
+        case 'newest':
+            query.order('created_at', {ascending: false});
+            break;
+        case 'oldest':
+            query.order('created_at', {ascending: true});
+            break;
+        case 'unanswered':
+            query.not('answers', '>', 0);
+            break;
+        default:
+            break;
+    }
 
-    return NextResponse.json(response)
+    response = await query;
+    const {count: totalPosts} = await supabase
+        .from('sensitivity_device')
+        .select('id', {count: 'exact'});
+
+    // @ts-ignore
+    const isNext = totalPosts > page * pageSize;
+    return NextResponse.json({
+        response,
+        isNext
+    });
 }
 
 export async function DELETE(request: Request) {

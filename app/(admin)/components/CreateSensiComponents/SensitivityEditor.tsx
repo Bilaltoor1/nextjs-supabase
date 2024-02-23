@@ -19,12 +19,13 @@ import {Checkbox} from "@/components/ui/checkbox";
 import {createSupabaseBrowserClient} from "@/lib/supabase/BrowserClient";
 import React, {useRef, useState} from "react";
 import {Textarea} from "@/components/ui/textarea";
-import {SparklesIcon} from "lucide-react";
+import {SparklesIcon , ImageIcon} from "lucide-react";
 import slugify from "slugify";
 import {defaultValues} from "@/constant/validation/SensitiviesDefualtValues";
 import {formSchema} from "@/constant/validation/SensitiviesSchemaValidation";
 import {useRouter} from "next/navigation";
 import Image from "next/image";
+import useDarkMode from "@/components/DarkMode/DarkLightController";
 
 export function SensitivityEditor() {
     const [img, setImg] = useState('')
@@ -37,7 +38,7 @@ export function SensitivityEditor() {
         resolver: zodResolver(formSchema),
         defaultValues: defaultValues,
     })
-
+    const [colorTheme, setTheme] =useDarkMode()
     async function onSubmit(values: z.infer<typeof formSchema>) {
         const {data} = await supabase.auth.getSession();
         const uuid = crypto.randomUUID();
@@ -106,7 +107,7 @@ export function SensitivityEditor() {
 
     return (
         <div className='flex flex-col items-center justify-center gap-4 max-w-[1280px] m-auto'>
-            <Input
+            <Input className='background-light800_darkgradient text-dark500_light500 dark:border-none'
                 id="picture"
                 type="file"
                 onChange={async (e) => {
@@ -131,10 +132,10 @@ export function SensitivityEditor() {
             />
             {
                 img ? <Image src={img} alt='nothing' width={400} height={400}/> :
-                    <Image src='/placeholder.png' alt='nothing' width={400} height={400}/>
+                    <ImageIcon width='150' height='150' className='dark:invert'/>
             }
 
-            <Input
+            <Input className='background-light800_darkgradient text-dark500_light500 dark:border-none'
                 id="picture"
                 type="file"
                 onChange={async (e) => {
@@ -159,7 +160,7 @@ export function SensitivityEditor() {
             />
             {
                 img ? <Image src={mobileIcon} alt='nothing' width={400} height={400}/> :
-                    <Image src='/placeholder.png' alt='nothing' width={400} height={400}/>
+                    <ImageIcon width='150' height='150' className='dark:invert'/>
             }
             <Form {...form}>
                 <form className="space-y-8">
@@ -172,7 +173,7 @@ export function SensitivityEditor() {
                                     <FormLabel
                                         className='text-dark500_light500 font-bold text-[13px]'>device_name</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="device_name" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="device_name" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -185,7 +186,7 @@ export function SensitivityEditor() {
                                 <FormItem className='xl:w-[45%] md:w-[40%] sm:w-full w-full'>
                                     <FormLabel className='text-dark500_light500 font-bold text-[13px]'>ram</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="ram" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="ram" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -198,7 +199,7 @@ export function SensitivityEditor() {
                                 <FormItem className='xl:w-[45%] md:w-[40%] sm:w-full w-full'>
                                     <FormLabel className='text-dark500_light500 font-bold text-[13px]'>rom</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="rom" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="rom" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -211,7 +212,7 @@ export function SensitivityEditor() {
                                 <FormItem className="xl:w-[45%] md:w-[40%] sm:w-full w-full">
                                     <FormLabel className='text-dark500_light500 font-bold text-[13px]'>Slug</FormLabel>
                                     <FormControl>
-                                        <Input
+                                        <Input className='background-light800_darkgradient dark:border-none'
                                             placeholder="Slug"
                                             {...field}
                                         />
@@ -221,7 +222,7 @@ export function SensitivityEditor() {
                                             type="button"
                                             variant="outline"
                                             size="sm"
-                                            className="mt-2"
+                                            className="mt-2 background-light800_darkgradient text-dark500_light500 "
                                             onClick={() =>
                                                 field.onChange(slugify(form.getValues("device_name")))
                                             }
@@ -242,7 +243,7 @@ export function SensitivityEditor() {
                                     <FormLabel
                                         className='text-dark500_light500 font-bold text-[13px]'>proccessor</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="proccessor" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="proccessor" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -257,7 +258,7 @@ export function SensitivityEditor() {
                                     <FormLabel
                                         className='text-dark500_light500 font-bold text-[13px]'>screen-resolution</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="screen-resolution" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="screen-resolution" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -271,7 +272,7 @@ export function SensitivityEditor() {
                                     <FormLabel className='text-dark500_light500 font-bold text-[13px]'>Intro
                                         Text</FormLabel>
                                     <FormControl>
-                                        <Textarea placeholder="Write Into Here.." {...field}  />
+                                        <Textarea className='background-light800_darkgradient dark:border-none' placeholder="Write Into Here.." {...field}  />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -284,11 +285,13 @@ export function SensitivityEditor() {
                             name="intro"
                             render={({field}) => (
                                 <FormItem
-                                    className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 shadow">
+                                    className="flex flex-row dark:border-gray-500  items-start space-x-3 space-y-0 rounded-md border p-4 shadow">
                                     <FormControl>
                                         <Checkbox
                                             checked={field.value}
                                             onCheckedChange={field.onChange}
+                                            className="dark:border-gray-500 "
+
                                         />
                                     </FormControl>
                                     <div className="space-y-1 leading-none">
@@ -304,11 +307,12 @@ export function SensitivityEditor() {
                             name="ads"
                             render={({field}) => (
                                 <FormItem
-                                    className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 shadow">
+                                    className="flex flex-row dark:border-gray-500  items-start space-x-3 space-y-0 rounded-md border p-4 shadow">
                                     <FormControl>
                                         <Checkbox
                                             checked={field.value}
                                             onCheckedChange={field.onChange}
+                                            className="dark:border-gray-500"
                                         />
                                     </FormControl>
                                     <div className="space-y-1 leading-none">
@@ -324,11 +328,13 @@ export function SensitivityEditor() {
                             name="camera"
                             render={({field}) => (
                                 <FormItem
-                                    className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 shadow">
+                                    className="flex flex-row  dark:border-gray-500 items-start space-x-3 space-y-0 rounded-md border p-4 shadow">
                                     <FormControl>
                                         <Checkbox
                                             checked={field.value}
                                             onCheckedChange={field.onChange}
+                                            className="dark:border-gray-500"
+
                                         />
                                     </FormControl>
                                     <div className="space-y-1 leading-none">
@@ -344,11 +350,13 @@ export function SensitivityEditor() {
                             name="gyroScope"
                             render={({field}) => (
                                 <FormItem
-                                    className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 shadow">
+                                    className="flex flex-row items-start dark:border-gray-500  space-x-3 space-y-0 rounded-md border p-4 shadow">
                                     <FormControl>
                                         <Checkbox
                                             checked={field.value}
                                             onCheckedChange={field.onChange}
+                                            className="dark:border-gray-500 "
+
                                         />
                                     </FormControl>
                                     <div className="space-y-1 leading-none">
@@ -370,7 +378,7 @@ export function SensitivityEditor() {
                                     <FormLabel
                                         className='text-dark500_light500 font-bold text-[13px]'>tpp_no_scope</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="tpp_no_scope" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="tpp_no_scope" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -384,7 +392,7 @@ export function SensitivityEditor() {
                                     <FormLabel
                                         className='text-dark500_light500 font-bold text-[13px]'>fpp_no_scope</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="fpp_no_scope" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="fpp_no_scope" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -399,7 +407,7 @@ export function SensitivityEditor() {
                                     <FormLabel
                                         className='text-dark500_light500 font-bold text-[13px]'>red_dot</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="red_dot" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="red_dot" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -414,7 +422,7 @@ export function SensitivityEditor() {
                                     <FormLabel
                                         className='text-dark500_light500 font-bold text-[13px]'>2x_scope</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="2x_scope" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="2x_scope" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -429,7 +437,7 @@ export function SensitivityEditor() {
                                     <FormLabel
                                         className='text-dark500_light500 font-bold text-[13px]'>3x_scope</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="3x_scope" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="3x_scope" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -444,7 +452,7 @@ export function SensitivityEditor() {
                                     <FormLabel
                                         className='text-dark500_light500 font-bold text-[13px]'>4x_scope</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="4x_scope" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="4x_scope" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -459,7 +467,7 @@ export function SensitivityEditor() {
                                     <FormLabel
                                         className='text-dark500_light500 font-bold text-[13px]'>6x_scope</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="6x_scope" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="6x_scope" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -474,7 +482,7 @@ export function SensitivityEditor() {
                                     <FormLabel
                                         className='text-dark500_light500 font-bold text-[13px]'>8x_scope</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="8x_scope" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="8x_scope" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -489,7 +497,7 @@ export function SensitivityEditor() {
                                     <FormLabel
                                         className='text-dark500_light500 font-bold text-[13px]'>ads_tpp_no_scope</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="ads_tpp_no_scope" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="ads_tpp_no_scope" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -504,7 +512,7 @@ export function SensitivityEditor() {
                                     <FormLabel
                                         className='text-dark500_light500 font-bold text-[13px]'>ads_fpp_no_scope</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="ads_fpp_no_scope" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="ads_fpp_no_scope" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -519,7 +527,7 @@ export function SensitivityEditor() {
                                     <FormLabel
                                         className='text-dark500_light500 font-bold text-[13px]'>ads_red_dot</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="ads_red_dot" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="ads_red_dot" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -534,7 +542,7 @@ export function SensitivityEditor() {
                                     <FormLabel
                                         className='text-dark500_light500 font-bold text-[13px]'>ads_2x</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="ads_2x" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="ads_2x" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -549,7 +557,7 @@ export function SensitivityEditor() {
                                     <FormLabel
                                         className='text-dark500_light500 font-bold text-[13px]'>ads_3x</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="ads_3x" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="ads_3x" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -564,7 +572,7 @@ export function SensitivityEditor() {
                                     <FormLabel
                                         className='text-dark500_light500 font-bold text-[13px]'>ads_4x</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="ads_4x" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="ads_4x" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -579,7 +587,7 @@ export function SensitivityEditor() {
                                     <FormLabel
                                         className='text-dark500_light500 font-bold text-[13px]'>ads_6x</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="ads_6x" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="ads_6x" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -594,7 +602,7 @@ export function SensitivityEditor() {
                                     <FormLabel
                                         className='text-dark500_light500 font-bold text-[13px]'>ads_8x</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="ads_8x" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="ads_8x" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -609,7 +617,7 @@ export function SensitivityEditor() {
                                     <FormLabel
                                         className='text-dark500_light500 font-bold text-[13px]'>gyro_tpp_no_scope</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="gyro_tpp_no_scope" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="gyro_tpp_no_scope" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -624,7 +632,7 @@ export function SensitivityEditor() {
                                     <FormLabel
                                         className='text-dark500_light500 font-bold text-[13px]'>gyro_fpp_no_scope</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="gyro_fpp_no_scope" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="gyro_fpp_no_scope" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -639,7 +647,7 @@ export function SensitivityEditor() {
                                     <FormLabel
                                         className='text-dark500_light500 font-bold text-[13px]'>gyro_red_dot</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="gyro_red_dot" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="gyro_red_dot" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -654,7 +662,7 @@ export function SensitivityEditor() {
                                     <FormLabel
                                         className='text-dark500_light500 font-bold text-[13px]'>gyro_2x</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="gyro_2x" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="gyro_2x" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -669,7 +677,7 @@ export function SensitivityEditor() {
                                     <FormLabel
                                         className='text-dark500_light500 font-bold text-[13px]'>gyro_3x</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="gyro_3x" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="gyro_3x" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -684,7 +692,7 @@ export function SensitivityEditor() {
                                     <FormLabel
                                         className='text-dark500_light500 font-bold text-[13px]'>gyro_4x</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="gyro_4x" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="gyro_4x" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -699,7 +707,7 @@ export function SensitivityEditor() {
                                     <FormLabel
                                         className='text-dark500_light500 font-bold text-[13px]'>gyro_6x</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="gyro_6x" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="gyro_6x" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -714,7 +722,7 @@ export function SensitivityEditor() {
                                     <FormLabel
                                         className='text-dark500_light500 font-bold text-[13px]'>gyro_8x</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="gyro_8x" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="gyro_8x" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -729,7 +737,7 @@ export function SensitivityEditor() {
                                     <FormLabel
                                         className='text-dark500_light500 font-bold text-[13px]'>freelook_camera_tpp</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="freelook_camera_tpp" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="freelook_camera_tpp" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -744,7 +752,7 @@ export function SensitivityEditor() {
                                     <FormLabel
                                         className='text-dark500_light500 font-bold text-[13px]'>freelook_camera_parachuting</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="freelook_camera_parachuting" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="freelook_camera_parachuting" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -759,7 +767,7 @@ export function SensitivityEditor() {
                                     <FormLabel
                                         className='text-dark500_light500 font-bold text-[13px]'>freelook_camera_fpp_character</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="freelook_camera_fpp_character" {...field} />
+                                        <Input className='background-light800_darkgradient dark:border-none' placeholder="freelook_camera_fpp_character" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -776,7 +784,7 @@ export function SensitivityEditor() {
                                     Detailed explanation of your problem?{" "}
                                     <span className="text-primary-500">*</span>
                                 </FormLabel>
-                                <FormControl className="mt-3.5">
+                                <FormControl className="mt-3.5 ">
                                     <Editor
                                         apiKey={process.env.NEXT_PUBLIC_TINY_API_KEY}
                                         onInit={(evt, editor) => {
@@ -787,18 +795,32 @@ export function SensitivityEditor() {
                                         onEditorChange={(content) => field.onChange(content)}
                                         initialValue={""}
                                         init={{
-                                            height: 500,
+                                            height: 350,
                                             menubar: false,
                                             plugins: [
-                                                'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-                                                'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                                                'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+                                                "advlist",
+                                                "autolink",
+                                                "lists",
+                                                "link",
+                                                "image",
+                                                "charmap",
+                                                "preview",
+                                                "anchor",
+                                                "searchreplace",
+                                                "visualblocks",
+                                                "codesample",
+                                                "fullscreen",
+                                                "insertdatetime",
+                                                "media",
+                                                "table",
                                             ],
-                                            toolbar: 'undo redo | blocks | ' +
-                                                'bold italic forecolor | alignleft aligncenter ' +
-                                                'alignright alignjustify | bullist numlist outdent indent | ' +
-                                                'removeformat | help',
-                                            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                                            toolbar:
+                                                "undo redo | codesample | formatpainter " + "fontfamily | fontsize" +
+                                                "bold italic forecolor | alignleft aligncenter " +
+                                                "alignright alignjustify | bullist numlist",
+                                            content_style: "body { font-family:Inter; font-size:16px }",
+                                            skin: colorTheme === "dark" ? "oxide-dark" : "oxide",
+                                            content_css: colorTheme === "dark" ? "dark" : "light",
                                         }}
                                     />
                                 </FormControl>
@@ -811,7 +833,7 @@ export function SensitivityEditor() {
                         )}
                     />
                     <Button onClick={form.handleSubmit(onSubmit)}
-                            className='bg-black text-white dark:bg-light-850 dark:text-dark-100'>Submit data</Button>
+                            className='background-light800_darkgradient text-dark500_light500  '>Submit data</Button>
                 </form>
             </Form>
         </div>

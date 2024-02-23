@@ -1,27 +1,33 @@
-'use client'
-import React, {useState} from 'react';
+import Image from "next/image";
+import SensitivityCard from "@/components/Sensitivity/SensitivityCard"
+import Link from "next/link";
+import {Button} from "@/components/ui/Animated-button";
+import CarouselPlugin from "@/components/shared/GamesCrosel";
 
+export const metadata = {
+    title: 'Home',
+    description: "Game store is excellent website for mod games lovers and who wants to play with unlimited resources. we are also providing the paid games in free and also provide the Sensitivity for all the mobile device to boost your pubg mobile game experience so that you can play like a pro player.",
 
- function Page() {
-    const [file , setFile] = useState('')
-    const createFile = (e : React.FormEvent) => {
-        e.preventDefault()
-       console.log(file)
-    }
+};
 
-
+async function Page() {
+    const data = await fetch(process.env.URL + '/api/topfour');
+    const response = await data.json();
     return (
         <div>
-            <h1>HOME PAGE</h1>
-            <form onSubmit={createFile}>
-                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor="file_input">Upload
-                    file</label>
-                <input
-                    className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                    id="file_input" name="file_input" type="file" value={file}
-                    onChange={(e) => setFile(e.target.value)}/>
-                <button type='submit'>Upload</button>
-            </form>
+            <CarouselPlugin/>
+            <div>
+                <h1 className='h2-bold text-dark300_light700 my-6'>Recent Sensitivity : </h1>
+                <SensitivityCard sensitivity_device={response.response.data}/>
+                <div className='flex justify-center mt-10'>
+                    <Link href='/sensitivity'
+                    >
+                        <Button borderRadius='.5rem' borderClassName='hidden'
+                                className='bg-["#777"] dark:dark-gradient text-black dark:text-white border-neutral-200 dark:border-slate-800'>View
+                            More</Button>
+                    </Link>
+                </div>
+            </div>
         </div>
     );
 }
