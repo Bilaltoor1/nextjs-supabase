@@ -42,8 +42,8 @@ async function page({params}: { params: { slug: string } }) {
             {/* Detail of the is_published_sensitivity*/}
             <SensitivityDetail device={device}/>
             {/*    CREATE A COMMENT   */}
-            {/*<CreateComment post_slug={device.slug}/>*/}
-            {/*<DetailPostComment slug={params.slug}/>*/}
+            <CreateComment post_slug={device.slug}/>
+            <DetailPostComment slug={params.slug}/>
         </section>
     );
 }

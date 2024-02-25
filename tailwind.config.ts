@@ -63,6 +63,7 @@ const config: Config = {
       },
       screens: {
         xs: "420px",
+        xss: "350px",
       },
       keyframes: {
         "accordion-down": {

@@ -3,12 +3,12 @@ import {Slider} from "@/components/ui/slider"
 export default function CameraSensitivity({sensitivity}: any) {
 
     return (
-        <div className='bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 h-full rounded-xl p-4 mt-8'>
+        <div className='bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 h-full w-full rounded-xl p-4 mt-8'>
             <h2 className='h3-bold mb-3'>Camera Sensitivity</h2>
             {/* SLIDER AND TEXT CONTAINER */}
 
-            <div className='flex flex-wrap  md:flex-row flex-col  gap-5 space-x-6'>
-                <div className='flex flex-col md:w-[400px] w-[300px] ml-6'>
+            <div className='flex flex-wrap max-xs:w-full  md:flex-row flex-col  gap-5 xs:space-x-6'>
+                <div className='flex flex-col md:w-[400px] xs:w-[300px] w-full  xs:ml-6'>
                     {/*NAME OF THE SITTING */}
                     <div className='flex justify-between'>
                         <p className='text-[13px] font'>TPP No Scope</p> <p
@@ -20,7 +20,7 @@ export default function CameraSensitivity({sensitivity}: any) {
                         <span className='w-[10px] h-1 bg-black'></span>
                     </div>
                 </div>
-                <div className='flex flex-col md:w-[400px] w-[300px] ml-6'>
+                <div className='flex flex-col md:w-[400px] xs:w-[300px] w-full  xs:ml-6'>
                     {/*NAME OF THE SITTING */}
                     <div className='flex justify-between'>
                         <p className='text-[13px] font'>FPP No Scope</p> <p
@@ -33,7 +33,7 @@ export default function CameraSensitivity({sensitivity}: any) {
                     </div>
                 </div>
 
-                <div className='flex flex-col md:w-[400px] w-[300px] ml-6'>
+                <div className='flex flex-col md:w-[400px] xs:w-[300px] w-full  xs:ml-6'>
                     {/*NAME OF THE SITTING */}
                     <div className='flex justify-between'>
                         <p className='text-[13px] font'>Red Dot</p> <p
@@ -45,7 +45,7 @@ export default function CameraSensitivity({sensitivity}: any) {
                         <span className='w-[10px] h-1 bg-black'></span>
                     </div>
                 </div>
-                <div className='flex flex-col md:w-[400px] w-[300px] ml-6'>
+                <div className='flex flex-col md:w-[400px] xs:w-[300px] w-full  xs:ml-6'>
                     {/*NAME OF THE SITTING */}
                     <div className='flex justify-between'>
                         <p className='text-[13px] font'>2x Scope</p> <p
@@ -57,7 +57,7 @@ export default function CameraSensitivity({sensitivity}: any) {
                         <span className='w-[10px] h-1 bg-black'></span>
                     </div>
                 </div>
-                <div className='flex flex-col md:w-[400px] w-[300px] ml-6'>
+                <div className='flex flex-col md:w-[400px] xs:w-[300px] w-full  xs:ml-6'>
                     {/*NAME OF THE SITTING */}
                     <div className='flex justify-between'>
                         <p className='text-[13px] font'>3x Scope</p> <p
@@ -69,7 +69,7 @@ export default function CameraSensitivity({sensitivity}: any) {
                         <span className='w-[10px] h-1 bg-black'></span>
                     </div>
                 </div>
-                <div className='flex flex-col md:w-[400px] w-[300px] ml-6'>
+                <div className='flex flex-col md:w-[400px] xs:w-[300px] w-full  xs:ml-6'>
                     {/*NAME OF THE SITTING */}
                     <div className='flex justify-between'>
                         <p className='text-[13px] font'>4x Scope</p> <p
@@ -81,7 +81,7 @@ export default function CameraSensitivity({sensitivity}: any) {
                         <span className='w-[10px] h-1 bg-black'></span>
                     </div>
                 </div>
-                <div className='flex flex-col md:w-[400px] w-[300px] ml-6'>
+                <div className='flex flex-col md:w-[400px] xs:w-[300px] w-full  xs:ml-6'>
                     {/*NAME OF THE SITTING */}
                     <div className='flex justify-between'>
                         <p className='text-[13px] font'>6x Scope</p> <p
@@ -93,7 +93,7 @@ export default function CameraSensitivity({sensitivity}: any) {
                         <span className='w-[10px] h-1 bg-black'></span>
                     </div>
                 </div>
-                <div className='flex flex-col md:w-[400px] w-[300px] ml-6'>
+                <div className='flex flex-col md:w-[400px] xs:w-[300px] w-full  xs:ml-6'>
                     {/*NAME OF THE SITTING */}
                     <div className='flex justify-between'>
                         <p className='text-[13px] font'>8x Scope</p> <p

@@ -20,9 +20,9 @@ export default function GyroSensitvity({sensitivity}: any) {
                                  className='bg-light-850 px-8 focus:bg-dark-300 focus:text-white  '>Off</TabsTrigger>
                 </TabsList>
                 <TabsContent value="alwaysOn">
-                    <div className='flex flex-wrap  md:flex-row flex-col  gap-5 space-x-6'>
+                    <div className='flex flex-wrap  md:flex-row flex-col  gap-5 xs:space-x-6'>
 
-                        <div className='flex flex-col md:w-[400px] w-[300px] ml-6'>
+                        <div className='flex flex-col md:w-[400px] xs:w-[300px] w-full  xs:ml-6'>
                             {/*NAME OF THE SITTING */}
                             <div className='flex justify-between'>
                                 <p className='text-[13px] font'>FPP No Scope</p> <p
@@ -34,7 +34,7 @@ export default function GyroSensitvity({sensitivity}: any) {
                                 <span className='w-[10px] h-1 bg-black'></span>
                             </div>
                         </div>
-                        <div className='flex flex-col md:w-[400px] w-[300px] ml-6'>
+                        <div className='flex flex-col md:w-[400px] xs:w-[300px] w-full  xs:ml-6'>
                             {/*NAME OF THE SITTING */}
                             <div className='flex justify-between'>
                                 <p className='text-[13px] font'>TPP No Scope</p> <p
@@ -46,7 +46,7 @@ export default function GyroSensitvity({sensitivity}: any) {
                                 <span className='w-[10px] h-1 bg-black'></span>
                             </div>
                         </div>
-                        <div className='flex flex-col md:w-[400px] w-[300px] ml-6'>
+                        <div className='flex flex-col md:w-[400px] xs:w-[300px] w-full  xs:ml-6'>
                             {/*NAME OF THE SITTING */}
                             <div className='flex justify-between'>
                                 <p className='text-[13px] font'>Red Dot</p> <p
@@ -58,7 +58,7 @@ export default function GyroSensitvity({sensitivity}: any) {
                                 <span className='w-[10px] h-1 bg-black'></span>
                             </div>
                         </div>
-                        <div className='flex flex-col md:w-[400px] w-[300px] ml-6'>
+                        <div className='flex flex-col md:w-[400px] xs:w-[300px] w-full  xs:ml-6'>
                             {/*NAME OF THE SITTING */}
                             <div className='flex justify-between'>
                                 <p className='text-[13px] font'>2x Scope</p> <p
@@ -70,7 +70,7 @@ export default function GyroSensitvity({sensitivity}: any) {
                                 <span className='w-[10px] h-1 bg-black'></span>
                             </div>
                         </div>
-                        <div className='flex flex-col md:w-[400px] w-[300px] ml-6'>
+                        <div className='flex flex-col md:w-[400px] xs:w-[300px] w-full  xs:ml-6'>
                             {/*NAME OF THE SITTING */}
                             <div className='flex justify-between'>
                                 <p className='text-[13px] font'>3x Scope</p> <p
@@ -82,7 +82,7 @@ export default function GyroSensitvity({sensitivity}: any) {
                                 <span className='w-[10px] h-1 bg-black'></span>
                             </div>
                         </div>
-                        <div className='flex flex-col md:w-[400px] w-[300px] ml-6'>
+                        <div className='flex flex-col md:w-[400px] xs:w-[300px] w-full  xs:ml-6'>
                             {/*NAME OF THE SITTING */}
                             <div className='flex justify-between'>
                                 <p className='text-[13px] font'>4x Scope</p> <p
@@ -94,7 +94,7 @@ export default function GyroSensitvity({sensitivity}: any) {
                                 <span className='w-[10px] h-1 bg-black'></span>
                             </div>
                         </div>
-                        <div className='flex flex-col md:w-[400px] w-[300px] ml-6'>
+                        <div className='flex flex-col md:w-[400px] xs:w-[300px] w-full  xs:ml-6'>
                             {/*NAME OF THE SITTING */}
                             <div className='flex justify-between'>
                                 <p className='text-[13px] font'>6x Scope</p> <p
@@ -106,7 +106,7 @@ export default function GyroSensitvity({sensitivity}: any) {
                                 <span className='w-[10px] h-1 bg-black'></span>
                             </div>
                         </div>
-                        <div className='flex flex-col md:w-[400px] w-[300px] ml-6'>
+                        <div className='flex flex-col md:w-[400px] xs:w-[300px] w-full  xs:ml-6'>
                             {/*NAME OF THE SITTING */}
                             <div className='flex justify-between'>
                                 <p className='text-[13px] font'>8x Scope</p> <p
@@ -121,9 +121,9 @@ export default function GyroSensitvity({sensitivity}: any) {
                     </div>
                 </TabsContent>
                 <TabsContent value="scopeOn">
-                    <div className='flex flex-wrap  md:flex-row flex-col  gap-5 space-x-6'>
+                    <div className='flex flex-wrap  md:flex-row flex-col  gap-5 xs:space-x-6'>
 
-                        <div className='flex flex-col md:w-[400px] w-[300px] ml-6'>
+                        <div className='flex flex-col md:w-[400px] xs:w-[300px] w-full  xs:ml-6'>
                             {/*NAME OF THE SITTING */}
                             <div className='flex justify-between'>
                                 <p className='text-[13px] font'>FPP No Scope</p> <p
@@ -135,7 +135,7 @@ export default function GyroSensitvity({sensitivity}: any) {
                                 <span className='w-[10px] h-1 bg-black'></span>
                             </div>
                         </div>
-                        <div className='flex flex-col md:w-[400px] w-[300px] ml-6'>
+                        <div className='flex flex-col md:w-[400px] xs:w-[300px] w-full  xs:ml-6'>
                             {/*NAME OF THE SITTING */}
                             <div className='flex justify-between'>
                                 <p className='text-[13px] font'>TPP No Scope</p> <p
@@ -147,7 +147,7 @@ export default function GyroSensitvity({sensitivity}: any) {
                                 <span className='w-[10px] h-1 bg-black'></span>
                             </div>
                         </div>
-                        <div className='flex flex-col md:w-[400px] w-[300px] ml-6'>
+                        <div className='flex flex-col md:w-[400px] xs:w-[300px] w-full  xs:ml-6'>
                             {/*NAME OF THE SITTING */}
                             <div className='flex justify-between'>
                                 <p className='text-[13px] font'>Red Dot</p> <p
@@ -159,7 +159,7 @@ export default function GyroSensitvity({sensitivity}: any) {
                                 <span className='w-[10px] h-1 bg-black'></span>
                             </div>
                         </div>
-                        <div className='flex flex-col md:w-[400px] w-[300px] ml-6'>
+                        <div className='flex flex-col md:w-[400px] xs:w-[300px] w-full  xs:ml-6'>
                             {/*NAME OF THE SITTING */}
                             <div className='flex justify-between'>
                                 <p className='text-[13px] font'>2x Scope</p> <p
@@ -171,7 +171,7 @@ export default function GyroSensitvity({sensitivity}: any) {
                                 <span className='w-[10px] h-1 bg-black'></span>
                             </div>
                         </div>
-                        <div className='flex flex-col md:w-[400px] w-[300px] ml-6'>
+                        <div className='flex flex-col md:w-[400px] xs:w-[300px] w-full  xs:ml-6'>
                             {/*NAME OF THE SITTING */}
                             <div className='flex justify-between'>
                                 <p className='text-[13px] font'>3x Scope</p> <p
@@ -183,7 +183,7 @@ export default function GyroSensitvity({sensitivity}: any) {
                                 <span className='w-[10px] h-1 bg-black'></span>
                             </div>
                         </div>
-                        <div className='flex flex-col md:w-[400px] w-[300px] ml-6'>
+                        <div className='flex flex-col md:w-[400px] xs:w-[300px] w-full  xs:ml-6'>
                             {/*NAME OF THE SITTING */}
                             <div className='flex justify-between'>
                                 <p className='text-[13px] font'>4x Scope</p> <p
@@ -195,7 +195,7 @@ export default function GyroSensitvity({sensitivity}: any) {
                                 <span className='w-[10px] h-1 bg-black'></span>
                             </div>
                         </div>
-                        <div className='flex flex-col md:w-[400px] w-[300px] ml-6'>
+                        <div className='flex flex-col md:w-[400px] xs:w-[300px] w-full  xs:ml-6'>
                             {/*NAME OF THE SITTING */}
                             <div className='flex justify-between'>
                                 <p className='text-[13px] font'>6x Scope</p> <p
@@ -207,7 +207,7 @@ export default function GyroSensitvity({sensitivity}: any) {
                                 <span className='w-[10px] h-1 bg-black'></span>
                             </div>
                         </div>
-                        <div className='flex flex-col md:w-[400px] w-[300px] ml-6'>
+                        <div className='flex flex-col md:w-[400px] xs:w-[300px] w-full  xs:ml-6'>
                             {/*NAME OF THE SITTING */}
                             <div className='flex justify-between'>
                                 <p className='text-[13px] font'>8x Scope</p> <p

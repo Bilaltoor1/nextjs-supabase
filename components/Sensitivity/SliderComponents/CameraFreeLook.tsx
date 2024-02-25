@@ -6,9 +6,9 @@ export default function CameraFreeLook({sensitivity} : any) {
         <div className='bg-gradient-to-r from-orange-300 to-rose-300 h-full rounded-xl p-4 mt-8'>
             <h2 className='h3-bold mb-3'>Camera ( Free Look )</h2>
             {/* SLIDER AND TEXT CONTAINER */}
-            <div className='flex flex-wrap  md:flex-row flex-col  gap-5 space-x-6'>
+            <div className='flex flex-wrap  md:flex-row flex-col  gap-5 xs:space-x-6'>
 
-                <div className='flex flex-col md:w-[400px] w-[300px] ml-6'>
+                <div className='flex flex-col  md:w-[400px] xs:w-[300px] w-full  xs:ml-6'>
                     {/*NAME OF THE SITTING */}
                     <div className='flex justify-between'>
                         <p className='text-[13px] font'>TPP (Character , Vehicle)</p> <p
@@ -20,7 +20,7 @@ export default function CameraFreeLook({sensitivity} : any) {
                         <span className='w-[10px] h-1 bg-black'></span>
                     </div>
                 </div>
-                <div className='flex flex-col md:w-[400px] w-[300px] ml-6'>
+                <div className='flex flex-col  md:w-[400px] xs:w-[300px] w-full  xs:ml-6'>
                     {/*NAME OF THE SITTING */}
                     <div className='flex justify-between'>
                         <p className='text-[13px] font'>Camera (Parachuting)</p> <p
@@ -32,7 +32,7 @@ export default function CameraFreeLook({sensitivity} : any) {
                         <span className='w-[10px] h-1 bg-black'></span>
                     </div>
                 </div>
-                <div className='flex flex-col md:w-[400px] w-[300px] ml-6'>
+                <div className='flex flex-col  md:w-[400px] xs:w-[300px] w-full  xs:ml-6'>
                     {/*NAME OF THE SITTING */}
                     <div className='flex justify-between'>
                         <p className='text-[13px] font'>FPP (character)</p> <p
