@@ -19,7 +19,7 @@ async function SensitivityCard({sensitivity_device} : any) {
             {
                 sensitivity_device?.map((mobile : any) => (
                     <Card key={mobile}
-                          className="w-[320px] h-[420px] p-0 dark:border-gray-500  bg-gray-700 rounded-md bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-40 border border-gray-100">
+                          className="xs:w-[320px] w-full h-[420px] p-0 dark:border-gray-500  bg-gray-700 rounded-md bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-40 border border-gray-100">
                         <CardHeader className='p-0'>
                             <Image src={mobile?.thumbnail_url} alt="project" width={350} height={300}
                                    className='w-full h-[250px]  object-cover rounded-t-lg'/>

@@ -25,12 +25,12 @@ async function Page({searchParams}: any) {
         pageSize: searchParams.pageSize ? +searchParams.pageSize : 9,
     });
     return (
-        <div>
+        <>
             <LocalSearch route="/sensitivity"
                          iconPosition="left"
                          imgSrc="/assets/icons/search.svg"
                          placeholder="Search your device"
-                         otherClasses=" mb-8 max-md:w-[350px] m-auto"/>
+                         otherClasses=" mb-8 w-full  m-auto"/>
             <Filter/>
             <div className='flex flex-wrap gap-8'>
                 {
@@ -50,7 +50,7 @@ async function Page({searchParams}: any) {
                 }
 
             </div>
-        </div>
+        </>
     );
 }
 

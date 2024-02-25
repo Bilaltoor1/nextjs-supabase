@@ -1,7 +1,7 @@
 import React from 'react';
 import { Skeleton } from "@/components/ui/skeleton"
 
-function Loading() {
+function Loadingf() {
     return (
         <section className='flex flex-col max-w-5xl h-full mx-auto xl:mt-10 md:mt-8  pb-10'>
             <div>
@@ -28,7 +28,7 @@ function Loading() {
     );
 }
 
-export default Loading;
+export default Loadingf;
 
 
 

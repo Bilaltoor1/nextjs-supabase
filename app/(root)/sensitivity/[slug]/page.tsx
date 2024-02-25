@@ -29,7 +29,7 @@ async function page({params}: { params: { slug: string } }) {
     const device = response.data;
 
     return (
-        <section className='flex flex-col max-w-5xl h-full mx-auto xl:mt-10 md:mt-8  pb-10'>
+        <section className='flex flex-col max-w-5xl h-full mx-auto xl:mt-10 md:mt-8 overflow-x-hidden pb-10'>
             <div className='bg-gray-500 rounded-xl h-[400px] max-md:h-[250px] w-full'>
                 <Image src={device?.thumbnail_url} alt='article-img' height={400} width={1200}
                        className='rounded-xl h-[400px] max-md:h-[250px] w-full object-center'/>
@@ -42,8 +42,8 @@ async function page({params}: { params: { slug: string } }) {
             {/* Detail of the is_published_sensitivity*/}
             <SensitivityDetail device={device}/>
             {/*    CREATE A COMMENT   */}
-            <CreateComment post_slug={device.slug}/>
-            <DetailPostComment slug={params.slug}/>
+            {/*<CreateComment post_slug={device.slug}/>*/}
+            {/*<DetailPostComment slug={params.slug}/>*/}
         </section>
     );
 }
