@@ -29,7 +29,7 @@ export async function GET(request: Request) {
         )
         const { error } = await supabase.auth.exchangeCodeForSession(code)
         if (!error) {
-            return NextResponse.redirect(`https://gamify-store-rm8p4j26h-bilaltoor1.vercel.app${next}`)
+            return NextResponse.redirect(`${origin}${next}`)
         }
     }
 
