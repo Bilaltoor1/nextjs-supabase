@@ -13,7 +13,7 @@ async function GameCardsContainer({GamesAndApps}: { GamesAndApps: any }) {
                     return (
                         <Link href={`/games/${game.slug}`} key={index}>
                             <div
-                                className='flex border border-slate-300 dark:border-gray-500 w-[400px] rounded-lg'>
+                                className='flex border border-slate-300 dark:border-gray-500 sm:w-[400px] xss:w-[350px] w-[300px] rounded-lg'>
                                 <div className='w-[100px] h-[100px] rounded-lg relative'>
                                     <Image src={game.thumbnail} alt='img' width={100} height={100}
                                            className='rounded-lg w-full min-h-[100px] min-w-[100px] h-full  overflow-hidden'/>
