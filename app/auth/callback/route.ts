@@ -28,12 +28,7 @@ export async function GET(request: Request) {
         )
         const { error } = await supabase.auth.exchangeCodeForSession(code)
         if (!error) {
-            if (process.env.NODE_ENV === 'development') {
                 return NextResponse.redirect(`${process.env.URL}${next}`)
-            }
-            else {
-                return NextResponse.redirect(`${process.env.URL}${next}`)
-            }
         }
     }
 
