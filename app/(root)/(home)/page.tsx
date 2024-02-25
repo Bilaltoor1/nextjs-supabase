@@ -11,22 +11,22 @@ export const metadata = {
 };
 
 async function Page() {
-    const data = await fetch(process.env.URL + '/api/topfour');
-    const response = await data.json();
+    // const data = await fetch(process.env.URL + '/api/topfour');
+    // const response = await data.json();
     return (
         <div>
             <CarouselPlugin/>
             <div>
                 <h1 className='h2-bold text-dark300_light700 my-6'>Recent Sensitivity : </h1>
-                <SensitivityCard sensitivity_device={response.response.data}/>
-                <div className='flex justify-center mt-10'>
-                    <Link href='/sensitivity'
-                    >
-                        <Button borderRadius='.5rem' borderClassName='hidden'
-                                className='bg-["#777"] dark:dark-gradient text-black dark:text-white border-neutral-200 dark:border-slate-800'>View
-                            More</Button>
-                    </Link>
-                </div>
+                {/*<SensitivityCard sensitivity_device={response.response.data}/>*/}
+                {/*<div className='flex justify-center mt-10'>*/}
+                {/*    <Link href='/sensitivity'*/}
+                {/*    >*/}
+                {/*        <Button borderRadius='.5rem' borderClassName='hidden'*/}
+                {/*                className='bg-["#777"] dark:dark-gradient text-black dark:text-white border-neutral-200 dark:border-slate-800'>View*/}
+                {/*            More</Button>*/}
+                {/*    </Link>*/}
+                {/*</div>*/}
             </div>
         </div>
     );
