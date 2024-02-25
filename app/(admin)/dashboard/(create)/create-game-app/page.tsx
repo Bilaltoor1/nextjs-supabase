@@ -69,8 +69,6 @@ export default function page() {
         }
         console.log(apps_data)
         const response = await CreateGameAndAppAction({appsData: apps_data})
-        revalidatePath('/games')
-        router.push('/games')
     }
 
     return (

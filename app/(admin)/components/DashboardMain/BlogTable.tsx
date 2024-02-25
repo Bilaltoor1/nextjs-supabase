@@ -15,11 +15,13 @@ export default async function BlogTable({sensitivity_device, isNext , searchPara
         <div className=' space-y-10'>
             <div className="rounded-md dark:dark-gradient border-[0.5px] overflow-y-scroll ">
 
-                <div className="w-[800px] md:w-full">
-                    <div className="grid grid-cols-5 border-b p-5 dark:text-gray-500">
-                        <h1 className=" col-span-2">Title</h1>
-                        <h1>Thumbnail</h1>
-                        <h1>Publish</h1>
+                <div className="w-full">
+                    <div className="flex border-b p-5 gap-12 dark:text-gray-500">
+                        <h3 className="flex-1">Title</h3>
+                        <h3 className="flex-1">Thumbnail</h3>
+                        <h3  className="flex-1">is_Published</h3>
+                        <h3 className="flex-1">Thumbnail</h3>
+                        <h3  className="flex-1">Publish</h3>
                     </div>
                     <div className="space-y-10 p-5">
                         {sensitivity_device?.map((device: any, index: any) => {
@@ -74,7 +76,6 @@ const Actions = ({id, slug}: { id: string, slug: string }) => {
                 </Button>
             </Link>
             <DeleteAlert id={id} slug={slug}/>
-
             <Link href={`/dashboard/update-Sensitivity/${slug}`}>
                 <Button className="flex gap-2 items-center text-dark300_light700" variant="outline">
                     <Pencil1Icon/>

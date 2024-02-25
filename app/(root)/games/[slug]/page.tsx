@@ -5,38 +5,43 @@ import moment from "moment";
 import {Badge} from "@/components/ui/badge";
 import {Separator} from "@/components/ui/separator";
 import {Metadata} from "next";
+import CreateComment from "@/components/comments/CreateComment";
+import DetailPostComment from "@/components/comments/detail-post-comments";
+import {getComments} from "@/lib/actions/GetSensitivities.action";
+import DataTableForGamesAndApps from "@/app/(admin)/components/DashboardMain/DataTableForGamesAndApps";
+import DetailPostCommentsForApps from "@/components/comments/detail-post-comments-for-apps";
 
 export async function generateMetadata({params}: { params: { slug: string }}): Promise<Metadata> {
     const data = await fetch(process.env.URL + `/api/create-apps/${params.slug}`,{
         method:'GET',
     });
-    const device = await data.json();
+    const app = await data.json();
 
-    if (!device) {
+    if (!app) {
         return {};
     }
 
     return {
-        title: device.name,
-        description: device.description,
+        title: app.name,
+        description: app.description,
         openGraph: {
-            title: device.title as string,
-            description: device.description as string,
+            title: app.title as string,
+            description: app.description as string,
             type: "article",
             url: process.env.url + `/games/${params.slug}`,
             images: [
                 {
-                    url: device.thumbnail,
+                    url: app.thumbnail,
                     width: 1200,
                     height: 630,
-                    alt: device.name as string,
+                    alt: app.name as string,
                 },
             ],
         },
         twitter: {
             card: "summary_large_image",
-            title: device.name as string,
-            description: device.description as string,
+            title: app.name as string,
+            description: app.description as string,
         },
     };
 }
@@ -44,9 +49,10 @@ async function Page({params}: { params: { slug: string } }) {
     const data = await fetch(process.env.URL + `/api/create-apps/${params.slug}`,{
         method:'GET',
     });
-    const device = await data.json();
+    const app = await data.json();
+
     return (
-        <>
+        <div>
             <SharedBackButton url='/games'/>
             <div className='flex flex-col max-w-5xl h-full mx-auto xl:mt-10 md:mt-8  pb-10'>
                 <div className='flex'>
@@ -55,11 +61,11 @@ async function Page({params}: { params: { slug: string } }) {
                                className='rounded-lg w-full min-h-[100px] min-w-[100px] h-full  overflow-hidden'/>
                     </div>
                     <div className='flex flex-col pl-3'>
-                        <h3 className='font-bold text-dark300_light900'>{device.name}</h3>
-                        <p className="text-sm text-dark400_light900">{moment(device.created_at).fromNow()}</p>
+                        <h3 className='font-bold text-dark300_light900'>{app.name}</h3>
+                        <p className="text-sm text-dark400_light900">{moment(app.created_at).fromNow()}</p>
                         <div className='flex gap-3'>
-                            <Badge variant="outline" className='w-fit mt-1 px-2 bg-red-500'>{device.sub_category}</Badge>
-                            <Badge variant="outline" className='w-fit mt-1 px-2 bg-green-500'>{device.category}</Badge>
+                            <Badge variant="outline" className='w-fit mt-1 px-2 bg-red-500'>{app.sub_category}</Badge>
+                            <Badge variant="outline" className='w-fit mt-1 px-2 bg-green-500'>{app.category}</Badge>
                         </div>
                     </div>
                 </div>
@@ -68,37 +74,37 @@ async function Page({params}: { params: { slug: string } }) {
                     <div className='flex flex-col gap-5 mt-3'>
                         <div className='flex'>
                             <h3 className='text-dark400_light900 flex-1 font-bold'>Version</h3>
-                            <p className='text-dark400_light900 flex-1 '>{device.version}</p>
+                            <p className='text-dark400_light900 flex-1 '>{app.version}</p>
                         </div>
                         <Separator orientation='horizontal' className='bg-slate-900'/>
                         <div className='flex'>
                             <h3 className='text-dark400_light900 flex-1 font-bold'>Downloads</h3>
-                            <p className='text-dark400_light900 flex-1 '>{device.download_count}</p>
+                            <p className='text-dark400_light900 flex-1 '>{app.download_count}</p>
                         </div>
                         <Separator orientation='horizontal' className='bg-slate-900'/>
 
                         <div className='flex'>
                             <h3 className='text-dark400_light900 flex-1 font-bold'>Category</h3>
-                            <p className='text-dark400_light900 flex-1 '>{device.category}</p>
+                            <p className='text-dark400_light900 flex-1 '>{app.category}</p>
                         </div>
                         <Separator orientation='horizontal' className='bg-slate-900'/>
                         <div className='flex'>
                             <h3 className='text-dark400_light900 flex-1 font-bold'>Sub Category</h3>
-                            <p className='text-dark400_light900 flex-1 '>{device.sub_category}</p>
+                            <p className='text-dark400_light900 flex-1 '>{app.sub_category}</p>
                         </div>
                     </div>
                 </div>
                 <div className='mt-12'>
                     <h3 className='h2-bold text-dark300_light900'>Description</h3>
-                    <p className='text-dark400_light900 mt-3 font-inter'>{device.description}</p>
+                    <p className='text-dark400_light900 mt-3 font-inter'>{app.description}</p>
                 </div>
                 <div>
                     <h3 className='h2-bold text-dark300_light900 mt-12'>Screenshots</h3>
                     <div className='flex  flex-wrap gap-5 mt-3'>
                         {
-                            device.screenshots?.map((screenshot : any, index : any) => (
+                            app.screenshots?.map((screenshot : any, index : any) => (
                                 <div key={index} className='w-[200px] h-[200px] rounded-lg relative'>
-                                    <Image src={screenshot} alt={device.name} width={200} height={200}
+                                    <Image src={screenshot} alt={app.name} width={200} height={200}
                                            className='rounded-lg w-full h-full object-cover overflow-hidden'/>
                                 </div>
                             ))
@@ -124,14 +130,16 @@ async function Page({params}: { params: { slug: string } }) {
                     <h3 className='h2-bold text-dark300_light900 my-12'>Explore the Article</h3>
 
                     <div className='w-full  lg:max-w-[1000px] h-[400px] rounded-lg relative mx-auto'>
-                        <Image src={device?.thumbnail} alt={device.name} width={1000} height={400}
+                        <Image src={app?.thumbnail} alt={app.name} width={1000} height={400}
                                className='rounded-lg w-full h-full object-cover overflow-hidden'/>
                     </div>
                     <div className='markdown font-inter'
-                         dangerouslySetInnerHTML={{__html: device?.explanation || ''}}></div>
+                         dangerouslySetInnerHTML={{__html: app?.explanation || ''}}></div>
                 </div>
+                <CreateComment post_slug={app.slug}/>
+               <DetailPostCommentsForApps slug={params.slug}/>
             </div>
-        </>
+        </div>
 
     );
 }

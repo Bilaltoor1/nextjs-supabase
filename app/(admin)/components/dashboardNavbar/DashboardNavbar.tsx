@@ -5,6 +5,7 @@ import DarkModeButton from "@/components/DarkMode/DarkModeButton";
 
 import React from "react";
 import ProfileWidge from "@/app/(admin)/components/dashboardNavbar/ProfileWidge";
+import DashboardMenuSheet from "@/app/(admin)/components/dashboardNavbar/DashboardMenuSheet";
 
 const Navbar = () => {
     return (
@@ -24,6 +25,7 @@ const Navbar = () => {
             <div className="flex-between gap-5">
                 <DarkModeButton/>
                 <ProfileWidge/>
+                <DashboardMenuSheet/>
                 {/*<MobileNav />*/}
             </div>
         </nav>

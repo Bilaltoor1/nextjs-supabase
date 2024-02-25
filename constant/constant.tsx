@@ -17,6 +17,35 @@ export const sidebarLinks = [
     },
 ];
 
+export const DashboardSidebarLinks = [
+    {
+        imgURL: "/assets/icons/home.svg",
+        route: "/dashboard",
+        label: "Dashboard",
+    },
+    {
+        imgURL: "/assets/icons/mobile.svg",
+        route: "/dashboard/get-sensitivity-table",
+        label: "PUBG Sensitivity",
+    },
+    {
+        imgURL: "/assets/icons/GameIcon.svg",
+        route: "/dashboard/get-game-apps-table",
+        label: "Games And Apps",
+    },
+    {
+        imgURL: "/assets/icons/pencil.svg",
+        route: "/dashboard/create-game-app",
+        label: "Create Game/App",
+    },
+    {
+        imgURL: "/assets/icons/pencil.svg",
+        route: "/dashboard/create-sensitivity",
+        label: "Create Sensitivity",
+    },
+];
+
+
 export const categoriesWithLabels = [
     { value: "App", label: "Mobile Applications" },
     { value: "Game", label: "Mobile Games" },

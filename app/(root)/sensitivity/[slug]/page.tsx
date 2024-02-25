@@ -5,6 +5,7 @@ import {Metadata} from "next";
 import DetailPostComment from "@/components/comments/detail-post-comments";
 import DetailPostCommentButton from "@/components/comments/detail-post-comment-button";
 import SensitivityDetail from "@/app/(root)/sensitivity/[slug]/sensitivity-detail";
+import {getComments} from "@/lib/actions/GetSensitivities.action";
 
 
 export async function generateMetadata({params}: { params: { slug: string } }): Promise<Metadata> {
@@ -27,7 +28,6 @@ async function page({params}: { params: { slug: string } }) {
     let response = await data.json();
     const device = response.data;
 
-
     return (
         <section className='flex flex-col max-w-5xl h-full mx-auto xl:mt-10 md:mt-8  pb-10'>
             <div className='bg-gray-500 rounded-xl h-[400px] max-md:h-[250px] w-full'>
@@ -39,7 +39,7 @@ async function page({params}: { params: { slug: string } }) {
                     GBRAM</h1>
                 <DetailPostCommentButton totalComments={2}/>
             </div>
-            {/* Detail of the sensitivity*/}
+            {/* Detail of the is_published_sensitivity*/}
             <SensitivityDetail device={device}/>
             {/*    CREATE A COMMENT   */}
             <CreateComment post_slug={device.slug}/>

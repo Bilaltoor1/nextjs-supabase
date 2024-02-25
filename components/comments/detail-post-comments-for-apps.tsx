@@ -1,16 +1,13 @@
 import DetailPostCommentWrapper from "@/components/comments/detail-post-wrapper";
 import PostComment from "@/components/comments/postComment";
 import NoComment from "@/components/comments/NoComment";
-import {getComments} from "@/lib/actions/GetSensitivities.action";
-
-
+import { getCommentsForGamesAndApps} from "@/lib/actions/GetSensitivities.action";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-
-const DetailPostComment = async ({slug}: { slug: string }) => {
-    const {comments} = await getComments(slug)
+const DetailPostCommentForApps = async ({slug}: { slug: string }) => {
+    const {comments} = await getCommentsForGamesAndApps(slug)
     return (
 
         <DetailPostCommentWrapper>
@@ -31,4 +28,4 @@ const DetailPostComment = async ({slug}: { slug: string }) => {
     );
 };
 
-export default DetailPostComment;
+export default DetailPostCommentForApps;

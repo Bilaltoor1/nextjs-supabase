@@ -74,7 +74,7 @@ export async function getSingleDevice(slug: string) {
         throw error;
     }
 }
-export async  function getComments(slug: string | string[]) {
+export async  function getComments(slug: string  , limit: number = 5) {
     "use server"
     const supabase =  supabaseServerClient();
 
@@ -84,19 +84,104 @@ export async  function getComments(slug: string | string[]) {
             .select('*')
             .eq('post_slug', slug)
             .order('created_at', {ascending: false})
-            .limit(5);
-
+            .limit(limit);
+        const {count: totalComments} = await supabase
+            .from('comments')
+            .select('id', {count: 'exact'})
+            .eq('post_slug', slug)
+        ;
         if (error) {
             throw error;
         }
 
+        return {comments, totalComments};
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+export async  function getCommentsForGamesAndApps(slug: string  , limit: number = 5) {
+    "use server"
+    const supabase =  supabaseServerClient();
+
+    try {
+        const {data: comments, error} = await supabase
+            .from('apps_comments')
+            .select('*')
+            .eq('post_slug', slug)
+            .order('created_at', {ascending: false})
+            .limit(limit);
+        const {count: totalComments} = await supabase
+            .from('comments')
+            .select('id', {count: 'exact'})
+            .eq('post_slug', slug)
+        ;
+        if (error) {
+            throw error;
+        }
+
+        return {comments, totalComments};
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+export async function deleteSingleComment(id: string) {
+    "use server"
+    const supabase =  supabaseServerClient();
+
+    try {
+        const {data: comments, error} = await supabase
+            .from('comments')
+            .delete()
+            .eq('id', id);
+        if (error) {
+            throw error;
+        }
+        return {comments};
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+
+}
+export async function deleteSingleCommentFromGameAndApps(id: string) {
+    "use server"
+    const supabase =  supabaseServerClient();
+
+    try {
+        const {data: comments, error} = await supabase
+            .from('apps_comments')
+            .delete()
+            .eq('id', id);
+        if (error) {
+            throw error;
+        }
+        return {comments};
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+
+}
+export async function updateIsPublishedComments(id: string, is_published: boolean) {
+    "use server"
+    const supabase =  supabaseServerClient();
+
+    try {
+        const {data: comments, error} = await supabase
+            .from('comments')
+            .update({is_published  : is_published})
+            .eq('id', id);
+        if (error) {
+            throw error;
+        }
         return {comments};
     } catch (error) {
         console.error(error);
         throw error;
     }
 }
-
 export async function getSession () {
     "use server"
     const supabase =  supabaseServerClient();
@@ -118,7 +203,7 @@ export async function deleteSensitivityDeviceById(id: string, slug: string) {
     const supabase = await supabaseServerClient();
     const result = await supabase.from("sensitivity_device").delete().eq("id", id);
     revalidatePath(DASHBOARD);
-    revalidatePath("/sensitivity/" + slug);
+    revalidatePath("/is_published_sensitivity/" + slug);
     return JSON.stringify(result);
 }
 
@@ -127,7 +212,7 @@ export async function updateSensitivityDeviceById(id: string, data: any) {
     const supabase =  supabaseServerClient();
     const result = await supabase.from("sensitivity_device").update(data).eq("id", id);
     revalidatePath(DASHBOARD);
-    revalidatePath("/sensitivity/" + id);
+    revalidatePath("/is_published_sensitivity/" + id);
     return JSON.stringify(result);
 }
 
@@ -145,7 +230,7 @@ export async function updateSensitivityDetail(
         return JSON.stringify(resultBlog);
     } else {
         revalidatePath(DASHBOARD);
-        revalidatePath("/sensitivity/" + sensitivityData[0].slug);
+        revalidatePath("/is_published_sensitivity/" + sensitivityData[0].slug);
     }
 }
 

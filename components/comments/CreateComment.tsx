@@ -1,6 +1,6 @@
 "use client";
 import {useToast} from "@/components/ui/use-toast"
-import {CreateCommentsAction} from "@/lib/actions/CreateComments.action";
+import {CreateCommentsAction, CreateCommentsActionForGamesAndApps} from "@/lib/actions/CreateComments.action";
 import {Button} from "@/components/ui/button";
 import {
     Form,
@@ -13,7 +13,7 @@ import {Textarea} from "@/components/ui/textarea";
 import detailCommentConfig from '@/config/detail/detail-comment-config'
 import {zodResolver} from "@hookform/resolvers/zod";
 import {SendIcon, Loader2 as SpinnerIcon} from "lucide-react";
-import {useRouter} from "next/navigation";
+import {usePathname, useRouter} from "next/navigation";
 import React, {useEffect} from "react";
 import {useForm} from "react-hook-form";
 import toast from "react-hot-toast";
@@ -45,6 +45,7 @@ const DetailPostCommentForm: React.FC<DetailPostCommentFormProps> = ({
                                                                      }) => {
     const [isLoading, setIsLoading] = React.useState<boolean>(false);
     const router = useRouter();
+    const pathname = usePathname();
     const [user, setUser] = React.useState<any>(null);
     const {toast} = useToast()
     const form = useForm<FormValues>({
@@ -82,19 +83,33 @@ const DetailPostCommentForm: React.FC<DetailPostCommentFormProps> = ({
             content: data.comment,
         };
         console.log(data);
-        const response = await CreateCommentsAction({CommentData});
+        if(pathname.includes('/sensitivity/')){
+            const response = await CreateCommentsAction({CommentData});
+            if (response) {
+                setIsLoading(false);
 
-
-        if (response) {
-            setIsLoading(false);
-
-            router.refresh();
+                router.refresh();
+            } else {
+                setIsLoading(false);
+                toast({
+                    description: "?? Something went wrong. Please try again.",
+                })
+            }
         } else {
-            setIsLoading(false);
-            toast({
-                description: "?? Something went wrong. Please try again.",
-            })
+            const response = await CreateCommentsActionForGamesAndApps({CommentData});
+            if (response) {
+                setIsLoading(false);
+
+                router.refresh();
+            } else {
+                setIsLoading(false);
+                toast({
+                    description: "?? Something went wrong. Please try again.",
+                })
+            }
         }
+
+
     }
 
     useEffect(() => {

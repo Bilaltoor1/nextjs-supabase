@@ -9,7 +9,5 @@ export async function GET(request: Request, context: any) {
         .select(`* , sensitivities(*)`)
         .eq('slug', params.slug)
         .single();
-    return NextResponse.json({
-        data
-    })
+    return NextResponse.json({data})
 }

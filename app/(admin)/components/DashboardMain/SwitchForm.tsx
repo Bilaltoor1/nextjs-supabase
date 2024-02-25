@@ -23,7 +23,7 @@ export default function SwitchForm({
     };
     return (
         <form onSubmit={handleonSubmit}>
-            <Switch type="submit" checked={checked} className={checked ? 'bg-green-500' : 'bg-black'}>
+            <Switch type="submit" checked={checked} className={checked ? 'bg-green-500 ' : 'bg-slate-900 '}>
                 <span className="sr-only">is_published</span>
             </Switch>
         </form>

@@ -16,3 +16,10 @@ export async function PUT(request: Request) {
     const response = await supabase.from("games_apps").update(data).eq('id', data.id)
     return NextResponse.json(response)
 }
+
+export async function DELETE(request: Request) {
+    const supabase = supabaseServerClient();
+    const data = await request.json();
+    const response = await supabase.from("games_apps").delete().eq('id', data.id)
+    return NextResponse.json(response)
+}

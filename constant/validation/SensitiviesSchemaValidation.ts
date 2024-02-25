@@ -1,7 +1,7 @@
 import {z} from "zod";
 
 export const formSchema = z.object({
-   // this is for the form validation of the device sensitivity table
+   // this is for the form validation of the device is_published_sensitivity table
     device_name: z.string().min(2, {
         message: "Username must be at least 2 characters.",
     }),

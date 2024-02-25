@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @import url("../styles/theme.css");
-
+@import url("../styles/switches.css");
 body {
   font-family: "Inter", sans-serif;
 }
@@ -170,4 +170,3 @@ img {
   max-width: 100%;
   height: auto;
 }
-
