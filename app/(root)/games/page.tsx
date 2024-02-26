@@ -20,7 +20,7 @@ async function Page({searchParams}: { searchParams: any }) {
                            iconPosition="left"
                            imgSrc="/assets/icons/search.svg"
                            placeholder="Search for any game and apps"
-                           otherClasses=" mb-8   md:w-full m-auto"/>
+                           otherClasses="mb-8 md:w-full m-auto"/>
             <GameFilter/>
             <Suspense  fallback={<LoadingSuspense/>}>
                 <GameCardsContainer GamesAndApps={GamesAndApps}/>
