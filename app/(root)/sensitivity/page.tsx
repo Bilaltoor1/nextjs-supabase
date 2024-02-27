@@ -9,6 +9,7 @@ import {Metadata} from "next";
 import BlogTable from "@/app/(admin)/components/DashboardMain/BlogTable";
 import LoadingSuspense from "@/app/(root)/sensitivity/loadingSuspense";
 
+import { unstable_cache } from 'next/cache';
 export const metadata: Metadata = {
     title: {
         default: "Sensitivity",

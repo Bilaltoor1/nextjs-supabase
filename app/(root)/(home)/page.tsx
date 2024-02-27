@@ -12,16 +12,15 @@ export const metadata = {
 };
 
 async function Page() {
-    const {sensitivity_device, isNext} = await getSensitivities({
-        filter: 'newest',
-        pageSize: 4,
-    });
+    const data = await fetch(process.env.URL + `/api/topfour`);
+    const devices = await data.json();
+
     return (
         <div>
             <CarouselPlugin/>
             <div>
                 <h1 className='h2-bold text-dark300_light700 my-6'>Recent Sensitivity : </h1>
-                <SensitivityCard sensitivity_device={sensitivity_device}/>
+                <SensitivityCard sensitivity_device={devices.response.data}/>
                 <div className='flex justify-center mt-10'>
                     <Link href='/sensitivity'
                     >

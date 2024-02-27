@@ -57,7 +57,7 @@ async function Page({params}: { params: { slug: string } }) {
             <div className='flex flex-col max-w-5xl h-full mx-auto xl:mt-10 md:mt-8  pb-10'>
                 <div className='flex'>
                     <div className='w-[100px] h-[100px] rounded-lg relative'>
-                        <Image src='/banner.jpeg' alt='img' width={100} height={100}
+                        <Image src={app.thumbnail} alt='img' width={100} height={100}
                                className='rounded-lg w-full min-h-[100px] min-w-[100px] h-full  overflow-hidden'/>
                     </div>
                     <div className='flex flex-col pl-3'>

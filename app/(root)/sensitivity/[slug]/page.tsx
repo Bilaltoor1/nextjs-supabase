@@ -5,7 +5,11 @@ import {Metadata} from "next";
 import DetailPostComment from "@/components/comments/detail-post-comments";
 import DetailPostCommentButton from "@/components/comments/detail-post-comment-button";
 import SensitivityDetail from "@/app/(root)/sensitivity/[slug]/sensitivity-detail";
-
+export async function generateStaticParams() {
+    const data = await fetch(process.env.URL + `/api/topfour`);
+    const devices = await data.json();
+    return devices.response.data
+}
 
 export async function generateMetadata({params}: { params: { slug: string } }): Promise<Metadata> {
     const data = await fetch(process.env.URL + `/api/sensitivity/${params.slug}`);
