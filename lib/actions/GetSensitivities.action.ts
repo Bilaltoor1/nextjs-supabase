@@ -4,101 +4,113 @@ import { revalidatePath } from "next/cache";
 
 const DASHBOARD = "/dashboard";
 
-
-
-// export async function getSensitivities(params: any) {
-//   try {
-//     const { searchQuery, filter, page = 1, pageSize = 4 } = params;
-//
-//     let query = `/sensitivity_device?limit=${pageSize}&offset=${(page - 1) * pageSize}`;
-//
-//     if (searchQuery) {
-//       query += `&device_name=ilike.*${encodeURIComponent(searchQuery)}*`;
-//     }
-//
-//     switch (filter) {
-//       case "newest":
-//         query += "&order=created_at.desc";
-//         break;
-//       case "oldest":
-//         query += "&order=created_at.asc";
-//         break;
-//       case "unanswered":
-//         query += "&answers=lt.1";
-//         break;
-//       default:
-//         break;
-//     }
-//
-//     const res = await fetch(
-//         process.env.NEXT_PUBLIC_SUPABASE_URL! + "/rest/v1/" + query, {
-//           headers: {
-//             apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-//           },
-//           cache: "force-cache",
-//         }
-//     );
-//
-//     // Assuming you want to simulate the behavior of totalPosts and isNext
-//     // based on the fetched data, you can calculate them accordingly.
-//
-//     // const totalPosts = sensitivity_device.length;
-//     // const isNext = totalPosts === pageSize; // Assuming pageSize = 4
-//     const sensitivity_device = await res.json();
-//     return { sensitivity_device };
-//   } catch (error) {
-//     console.error(error);
-//     throw error;
-//   }
-// }
-
 export async function getSensitivities(params: any) {
-  const supabase = supabaseServerClient();
-
   try {
     const { searchQuery, filter, page = 1, pageSize = 4 } = params;
 
-    let query = supabase
-      .from("sensitivity_device")
-      .select("*")
-      .range((page - 1) * pageSize, page * pageSize - 1);
+    let query = `/sensitivity_device?limit=${pageSize}&offset=${
+      (page - 1) * pageSize
+    }`;
 
     if (searchQuery) {
-      query.ilike("device_name", `%${searchQuery}%`);
+      query += `&device_name=ilike.*${encodeURIComponent(searchQuery)}*`;
     }
 
     switch (filter) {
       case "newest":
-        query.order("created_at", { ascending: false });
+        query += "&order=created_at.desc";
         break;
       case "oldest":
-        query.order("created_at", { ascending: true });
+        query += "&order=created_at.asc";
         break;
       case "unanswered":
-        query.not("answers", ">", 0);
+        query += "&answers=lt.1";
         break;
       default:
         break;
     }
 
-    const { data: sensitivity_device, error } = await query;
+    const res = await fetch(
+      process.env.NEXT_PUBLIC_SUPABASE_URL! + "/rest/v1/" + query,
+      {
+        headers: {
+          apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+        },
+        cache: "force-cache",
+      }
+    );
 
-    if (error) {
-      throw error;
-    }
+    const response = await fetch(
+      process.env.NEXT_PUBLIC_SUPABASE_URL! +
+        "/rest/v1/" +
+        `/sensitivity_device?limit="*"`,
+      {
+        headers: {
+          apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+        },
+        cache: "force-cache",
+      }
+    );
+    const sensitivity_deviceLength = await response.json();
+    const totalPosts = sensitivity_deviceLength.length;
+    const isNext = totalPosts > page * pageSize; // Assuming pageSize = 4
+    console.log(isNext, "isNext");
 
-    const { count: totalPosts } = await supabase
-      .from("sensitivity_device")
-      .select("id", { count: "exact" });
-    // @ts-ignore
-    const isNext = totalPosts > page * pageSize;
-
+    const sensitivity_device = await res.json();
     return { sensitivity_device, isNext };
   } catch (error) {
     console.error(error);
     throw error;
   }
 }
+
+// export async function getSensitivities(params: any) {
+//   const supabase = supabaseServerClient();
+
+//   try {
+//     const { searchQuery, filter, page = 1, pageSize = 4 } = params;
+
+//     let query = supabase
+//       .from("sensitivity_device")
+//       .select("*")
+//       .range((page - 1) * pageSize, page * pageSize - 1);
+
+//     if (searchQuery) {
+//       query.ilike("device_name", `%${searchQuery}%`);
+//     }
+
+//     switch (filter) {
+//       case "newest":
+//         query.order("created_at", { ascending: false });
+//         break;
+//       case "oldest":
+//         query.order("created_at", { ascending: true });
+//         break;
+//       case "unanswered":
+//         query.not("answers", ">", 0);
+//         break;
+//       default:
+//         break;
+//     }
+
+//     const { data: sensitivity_device, error } = await query;
+
+//     if (error) {
+//       throw error;
+//     }
+
+//     const { count: totalPosts } = await supabase
+//       .from("sensitivity_device")
+//       .select("id", { count: "exact" });
+//     // @ts-ignore
+//     const isNext = totalPosts > page * pageSize;
+
+//     return { sensitivity_device, isNext };
+//   } catch (error) {
+//     console.error(error);
+//     throw error;
+//   }
+// }
 
 export async function getSingleDevice(slug: string) {
   "use server";

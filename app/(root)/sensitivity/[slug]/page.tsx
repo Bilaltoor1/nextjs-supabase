@@ -5,10 +5,16 @@ import {Metadata} from "next";
 import DetailPostComment from "@/components/comments/detail-post-comments";
 import DetailPostCommentButton from "@/components/comments/detail-post-comment-button";
 import SensitivityDetail from "@/app/(root)/sensitivity/[slug]/sensitivity-detail";
+import { getSensitivities } from '@/lib/actions/GetSensitivities.action';
 export async function generateStaticParams() {
-    const data = await fetch(process.env.URL + `/api/topfour`);
-    const devices = await data.json();
-    return devices.response.data
+    const {sensitivity_device} = await getSensitivities({
+        filter: '',
+        searchQuery: '',
+        page: 1,
+        pageSize: 4,
+    });
+    
+    return sensitivity_device
 }
 
 export async function generateMetadata({params}: { params: { slug: string } }): Promise<Metadata> {

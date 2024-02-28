@@ -5,6 +5,12 @@ import moment from "moment/moment";
 import Link from "next/link";
 
 async function GameCardsContainer({GamesAndApps}: { GamesAndApps: any }) {
+    function truncateTitle(title: string, maxLength: number = 30): string {
+        if (title.length <= maxLength) {
+          return title;
+        }
+        return `${title.substring(0, maxLength)}...`;
+      }
     return (
         <div
             className=" h-full w-full flex flex-wrap  gap-6 mt-8 max-md:justify-center max-md:items-center">
@@ -19,7 +25,7 @@ async function GameCardsContainer({GamesAndApps}: { GamesAndApps: any }) {
                                            className='rounded-lg w-full min-h-[100px] min-w-[100px] h-full  overflow-hidden'/>
                                 </div>
                                 <div className='flex flex-col pl-3'>
-                                    <h3 className='font-bold text-dark300_light900'>{game.name}</h3>
+                                    <h3 className='font-bold text-dark300_light900'>{truncateTitle(game.name)}</h3>
                                     <p className="text-sm text-gray-500">{moment(game.created_at).fromNow()}</p>
                                     <div className='flex gap-3'>
                                         <Badge variant="outline" className='w-fit mt-1 px-2 bg-red-500'>{game.sub_category}</Badge>

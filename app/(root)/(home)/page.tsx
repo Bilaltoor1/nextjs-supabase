@@ -1,9 +1,7 @@
-import Image from "next/image";
 import SensitivityCard from "@/components/Sensitivity/SensitivityCard"
 import Link from "next/link";
 import {Button} from "@/components/ui/Animated-button";
 import CarouselPlugin from "@/components/shared/GamesCrosel";
-import {getSensitivities} from "@/lib/actions/GetSensitivities.action";
 
 export const metadata = {
     title: 'Home',

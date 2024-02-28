@@ -10,9 +10,6 @@ export const metadata: Metadata = {
         template: "%s - Game Store",
     },
     description: "Game store is excellent website for mod games lovers and who wants to play with unlimited resources. we are also providing the paid games in free and also provide the Sensitivity for all the mobile device to boost your pubg mobile game experience so that you can play like a pro player.",
-    twitter: {
-        card: "summary_large_image",
-    },
 };
 
 function HomeLayout({children}: { children: React.ReactNode }) {

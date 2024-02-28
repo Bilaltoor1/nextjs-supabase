@@ -13,7 +13,7 @@ import {DashboardSidebarLinks} from "@/constant/constant";
 const NavContent = () => {
     const pathname = usePathname();
     return (
-        <section className="flex h-full flex-col gap-6 pt-16">
+        <section className="flex h-full flex-col gap-6 pt-16 ">
             {DashboardSidebarLinks.map((item) => {
                 const isActive = pathname === item.route;
               
@@ -34,7 +34,7 @@ const NavContent = () => {
                                 height={20}
                                 className={`${isActive ? "" : "invert-colors"}`}
                             />
-                            <p className={`${isActive ? "base-bold" : "font-normal "}font-spaceGrotesk `}>
+                            <p className={`${isActive ? "base-bold" : "font-normal "}font-inter `}>
                                 {item.label}
                             </p>
                         </Link>
