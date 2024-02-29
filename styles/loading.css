@@ -16,9 +16,6 @@
     transition: background-color var(--trans-dur);
 }
 
-main {
-    padding: 24px 0;
-}
 
 .ip {
     width: 100px;

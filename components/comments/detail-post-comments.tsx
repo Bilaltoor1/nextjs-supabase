@@ -11,12 +11,9 @@ export const revalidate = 0;
 
 const DetailPostComment =  ({slug}: { slug: string }) => {
     const [comments, setComments] = useState<any>([]);
-    const [loading, setLoading] = useState(true);
     const getCommentsData = async () => {
-        setLoading(true);
         const {comments} = await getComments(slug);
         setComments(comments);
-        setLoading(false);
     }
     useEffect(() => {
         getCommentsData();
@@ -24,7 +21,7 @@ const DetailPostComment =  ({slug}: { slug: string }) => {
     return (
 
         <DetailPostCommentWrapper>
-            <div className="py-5">
+           <div className="py-5">
                 {comments.length === 0 ? <NoComment/> : comments?.map((comment: any) => (
                     <PostComment
                         key={comment?.id}

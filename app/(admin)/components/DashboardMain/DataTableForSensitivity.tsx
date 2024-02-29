@@ -99,7 +99,7 @@ function DataTableForSensitivity({data}: { data: any[] }) {
                                                 </Button>
                                             </DropdownMenuTrigger>
                                             <DropdownMenuContent align="end"
-                                                                 className='background-light800_darkgradient'>
+                                                                 className='dark:bg-black bg-white'>
                                                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
                                                 <DropdownMenuItem className='text-dark300_light700'
                                                                   onClick={() => navigator.clipboard.writeText(sensitivity.id)}

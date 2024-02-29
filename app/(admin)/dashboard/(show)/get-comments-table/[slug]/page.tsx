@@ -80,7 +80,7 @@ function page() {
                                 <TableRow key={comment?.id}>
                                     <TableCell
                                         className="font-medium text-dark300_light700">{comment.id}</TableCell>
-                                    <TableCell>
+                                    <TableCell className='text-dark300_light700'>
                                         {comment.content}
                                     </TableCell>
                                     <TableCell align='center'>
@@ -117,7 +117,7 @@ function page() {
                                             </div>
                                         </label>
                                     </TableCell>
-                                    <TableCell>
+                                    <TableCell className='text-dark300_light700'>
                                         {comment.user_name}
                                     </TableCell>
                                     <TableCell className="text-right">
@@ -130,7 +130,7 @@ function page() {
                                             </DropdownMenuTrigger>
                                             <DropdownMenuContent align="end"
                                                                  className='background-light800_darkgradient'>
-                                                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                                                <DropdownMenuLabel className='text-dark300_light700'>Actions</DropdownMenuLabel>
                                                 <DropdownMenuItem className='text-dark300_light700'
                                                                   onClick={() => navigator.clipboard.writeText(comment.id)}
                                                 >

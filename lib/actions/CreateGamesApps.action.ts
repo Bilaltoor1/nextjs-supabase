@@ -63,7 +63,34 @@ export async function getGamesAndApps(params: any) {
       throw error;
     }
   }
-
+  export async function getSingleGameAndApp(slug: string) {
+    "use server";
+    const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/games_apps?slug=eq.${slug}`;
+  
+    try {
+      const response = await fetch(url, {
+        headers: {
+          apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+          'Content-Type': 'application/json',
+        },
+        cache:"force-cache"
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      console.log(data)
+      const app = data[0]; 
+  
+      return { app };
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+  
 // export async function getGamesAndApps(params: any) {
 //     const supabase =  supabaseServerClient();
 

@@ -8,7 +8,6 @@ import ADSSensitivity from "@/components/Sensitivity/SliderComponents/ADSSensiti
 import CameraFreeLook from "@/components/Sensitivity/SliderComponents/CameraFreeLook";
 import GyroSensitvity from "@/components/Sensitivity/SliderComponents/GyroSensitvity";
 import { getSingleDevice } from "@/lib/actions/GetSensitivities.action";
-import { set } from "zod";
 import LoadingDetails from "./loadingDetails";
 
 
