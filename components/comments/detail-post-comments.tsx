@@ -1,16 +1,26 @@
+'use client';
+import { useEffect, useState } from "react";
 import DetailPostCommentWrapper from "@/components/comments/detail-post-wrapper";
 import PostComment from "@/components/comments/postComment";
 import NoComment from "@/components/comments/NoComment";
 import {getComments} from "@/lib/actions/GetSensitivities.action";
 
-
-
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 
-const DetailPostComment = async ({slug}: { slug: string }) => {
-    const {comments} = await getComments(slug)
+const DetailPostComment =  ({slug}: { slug: string }) => {
+    const [comments, setComments] = useState<any>([]);
+    const [loading, setLoading] = useState(true);
+    const getCommentsData = async () => {
+        setLoading(true);
+        const {comments} = await getComments(slug);
+        setComments(comments);
+        setLoading(false);
+    }
+    useEffect(() => {
+        getCommentsData();
+    }, []);
     return (
 
         <DetailPostCommentWrapper>

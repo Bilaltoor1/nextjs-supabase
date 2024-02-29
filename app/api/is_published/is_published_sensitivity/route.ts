@@ -1,7 +1,7 @@
 import {supabaseServerClient} from "@/lib/supabase/server";
 import {NextResponse} from "next/server";
 import {revalidatePath} from "next/cache";
-const DASHBOARD = '/dashboard';
+const DASHBOARD = '/dashboard/sensitivity';
 export async function PATCH(request: Request) {
     const supabase = supabaseServerClient();
     const data = await request.json();

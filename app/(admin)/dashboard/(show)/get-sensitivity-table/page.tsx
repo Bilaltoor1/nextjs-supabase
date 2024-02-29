@@ -2,13 +2,13 @@ import React, {Suspense} from "react";
 import {Button} from "@/components/ui/button";
 import Link from "next/link";
 import {PlusIcon} from "@radix-ui/react-icons";
-import {getSensitivities} from "@/lib/actions/GetSensitivities.action";
+import {getSensitivities, getSensitivitiesForAdmin} from "@/lib/actions/GetSensitivities.action";
 import LocalSearch from "@/components/shared/LocalSearch";
 import Pagination from "@/components/pagination/pagination";
 import DataTableForSensitivity from "@/app/(admin)/components/DashboardMain/DataTableForSensitivity";
 
 export default async function Page({searchParams}: any) {
-    const {sensitivity_device, isNext} = await getSensitivities({
+    const {sensitivity_device, isNext} = await getSensitivitiesForAdmin({
         filter: searchParams.filter,
         searchQuery: searchParams.q,
         page: searchParams.page ? +searchParams.page : 1,

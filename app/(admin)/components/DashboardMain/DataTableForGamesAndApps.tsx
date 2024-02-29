@@ -34,7 +34,7 @@ function DataTableForGamesAndApps({data}: { data: any[] }) {
                 <TableHeader>
                     <TableRow>
                         <TableHead className='min-w-[250px] text-dark300_light700 font-bold'>App name</TableHead>
-                        <TableHead className='w-[150px] text-dark300_light700 font-bold'>App Icon</TableHead>
+                        <TableHead className='min-w-[150px] w-[150px] text-dark300_light700 font-bold'>App Icon</TableHead>
                         <TableHead className='w-[100px] text-dark300_light700 font-bold text-center'>is_Published</TableHead>
                         <TableHead className='w-[100px] text-dark300_light700 font-bold text-center'>Category</TableHead>
                         <TableHead className='w-[100px] text-dark300_light700 font-bold text-center'>Sub_Category</TableHead>
@@ -59,7 +59,6 @@ function DataTableForGamesAndApps({data}: { data: any[] }) {
                                     }),
                                 });
                                 const result = await response.json()
-                                console.log(result)
                                 router.refresh()
                                 return JSON.stringify(response);
                             }
@@ -84,7 +83,7 @@ function DataTableForGamesAndApps({data}: { data: any[] }) {
                                 <TableRow key={app.id}>
                                     <TableCell
                                         className="font-medium text-dark300_light700">{app.name}</TableCell>
-                                    <TableCell>
+                                    <TableCell width='150px'>
                                            <Image src={app?.app_game_icon} alt={app.name} width={100} height={80} className='w-[100px] h-[70px] object-fit'
                                                   />
                                     </TableCell>

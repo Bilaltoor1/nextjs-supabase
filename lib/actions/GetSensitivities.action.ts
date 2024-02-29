@@ -29,14 +29,75 @@ export async function getSensitivities(params: any) {
       default:
         break;
     }
-
     const res = await fetch(
       process.env.NEXT_PUBLIC_SUPABASE_URL! + "/rest/v1/" + query,
       {
         headers: {
           apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
         },
-        cache: "force-cache",
+        cache: "no-store",
+      }
+    );
+
+    const response = await fetch(
+      process.env.NEXT_PUBLIC_SUPABASE_URL! +
+        "/rest/v1/" +
+        `/sensitivity_device?limit="*"&is_published=eq.true`,
+      {
+        headers: {
+          apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+        },
+        cache: "no-store",
+      }
+    );
+    const sensitivity_deviceLength = await response.json();
+    const totalPosts = sensitivity_deviceLength.length;
+    const isNext = totalPosts > page * pageSize; // Assuming pageSize = 4
+    console.log(isNext, "isNext");
+     
+    const sensitivity_device = await res.json();
+    return { sensitivity_device, isNext };
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export async function getSensitivitiesForAdmin(params: any) {
+  "use server";
+  try {
+    const { searchQuery, filter, page = 1, pageSize = 4 } = params;
+
+    let query = `/sensitivity_device?limit=${pageSize}&offset=${
+      (page - 1) * pageSize
+    }`;
+
+    if (searchQuery) {
+      query += `&device_name=ilike.*${encodeURIComponent(searchQuery)}*`;
+    }
+
+    switch (filter) {
+      case "newest":
+        query += "&order=created_at.desc";
+        break;
+      case "oldest":
+        query += "&order=created_at.asc";
+        break;
+      case "unanswered":
+        query += "&answers=lt.1";
+        break;
+      default:
+        break;
+    }
+    const supabase = supabaseServerClient();
+    const {data} = await supabase.auth.getSession();
+    const res = await fetch(
+      process.env.NEXT_PUBLIC_SUPABASE_URL! + "/rest/v1/" + query,
+      {
+        headers: {
+          apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+          "Authorization": `Bearer ${data.session?.access_token}`
+        },
       }
     );
 
@@ -48,13 +109,11 @@ export async function getSensitivities(params: any) {
         headers: {
           apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
         },
-        cache: "force-cache",
       }
     );
     const sensitivity_deviceLength = await response.json();
     const totalPosts = sensitivity_deviceLength.length;
     const isNext = totalPosts > page * pageSize; // Assuming pageSize = 4
-    console.log(isNext, "isNext");
 
     const sensitivity_device = await res.json();
     return { sensitivity_device, isNext };
@@ -64,68 +123,25 @@ export async function getSensitivities(params: any) {
   }
 }
 
-// export async function getSensitivities(params: any) {
-//   const supabase = supabaseServerClient();
-
-//   try {
-//     const { searchQuery, filter, page = 1, pageSize = 4 } = params;
-
-//     let query = supabase
-//       .from("sensitivity_device")
-//       .select("*")
-//       .range((page - 1) * pageSize, page * pageSize - 1);
-
-//     if (searchQuery) {
-//       query.ilike("device_name", `%${searchQuery}%`);
-//     }
-
-//     switch (filter) {
-//       case "newest":
-//         query.order("created_at", { ascending: false });
-//         break;
-//       case "oldest":
-//         query.order("created_at", { ascending: true });
-//         break;
-//       case "unanswered":
-//         query.not("answers", ">", 0);
-//         break;
-//       default:
-//         break;
-//     }
-
-//     const { data: sensitivity_device, error } = await query;
-
-//     if (error) {
-//       throw error;
-//     }
-
-//     const { count: totalPosts } = await supabase
-//       .from("sensitivity_device")
-//       .select("id", { count: "exact" });
-//     // @ts-ignore
-//     const isNext = totalPosts > page * pageSize;
-
-//     return { sensitivity_device, isNext };
-//   } catch (error) {
-//     console.error(error);
-//     throw error;
-//   }
-// }
-
 export async function getSingleDevice(slug: string) {
   "use server";
-  const supabase = supabaseServerClient();
+  const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/sensitivity_device?slug=eq.${slug}&select=*,sensitivities(*)`;
 
   try {
-    const { data: device, error } = await supabase
-      .from("sensitivity_device")
-      .select(`* , sensitivities(*)`)
-      .eq("slug", slug)
-      .single();
+    const response = await fetch(url, {
+      headers: {
+        apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+        'Content-Type': 'application/json',
+      },
+      cache:"force-cache"
+    });
 
-    if (error) {
-      throw error;
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
+
+    const data = await response.json();
+    const device = data[0]; 
 
     return { device };
   } catch (error) {
@@ -133,6 +149,7 @@ export async function getSingleDevice(slug: string) {
     throw error;
   }
 }
+
 export async function getComments(slug: string, limit: number = 5) {
   "use server";
   const supabase = supabaseServerClient();
@@ -243,23 +260,8 @@ export async function updateIsPublishedComments(
     throw error;
   }
 }
-// export async function getSession () {
-//     "use server"
-//     const supabase =  supabaseServerClient();
 
-//     try {
-//         const {data: user, error} = await supabase.auth.getSession();
-
-//         if (error) {
-//             throw error;
-//         }
-
-//         return {user};
-//     } catch (error) {
-//         console.error(error);
-//         throw error;
-//     }
-// }
+  
 export async function deleteSensitivityDeviceById(id: string, slug: string) {
   const supabase = await supabaseServerClient();
   const result = await supabase
@@ -299,3 +301,89 @@ export async function updateSensitivityDetail(sensitivityData: any) {
     revalidatePath("/is_published_sensitivity/" + sensitivityData[0].slug);
   }
 }
+// export async function getSession () {
+//     "use server"
+//     const supabase =  supabaseServerClient();
+
+//     try {
+//         const {data: user, error} = await supabase.auth.getSession();
+
+//         if (error) {
+//             throw error;
+//         }
+
+//         return {user};
+//     } catch (error) {
+//         console.error(error);
+//         throw error;
+//     }
+// }
+//export async function getSensitivities(params: any) {
+  //   const supabase = supabaseServerClient();
+  
+  //   try {
+  //     const { searchQuery, filter, page = 1, pageSize = 4 } = params;
+  
+  //     let query = supabase
+  //       .from("sensitivity_device")
+  //       .select("*")
+  //       .range((page - 1) * pageSize, page * pageSize - 1);
+  
+  //     if (searchQuery) {
+  //       query.ilike("device_name", `%${searchQuery}%`);
+  //     }
+  
+  //     switch (filter) {
+  //       case "newest":
+  //         query.order("created_at", { ascending: false });
+  //         break;
+  //       case "oldest":
+  //         query.order("created_at", { ascending: true });
+  //         break;
+  //       case "unanswered":
+  //         query.not("answers", ">", 0);
+  //         break;
+  //       default:
+  //         break;
+  //     }
+  
+  //     const { data: sensitivity_device, error } = await query;
+  
+  //     if (error) {
+  //       throw error;
+  //     }
+  
+  //     const { count: totalPosts } = await supabase
+  //       .from("sensitivity_device")
+  //       .select("id", { count: "exact" });
+  //     // @ts-ignore
+  //     const isNext = totalPosts > page * pageSize;
+  
+  //     return { sensitivity_device, isNext };
+  //   } catch (error) {
+  //     console.error(error);
+  //     throw error;
+  //   }
+  // }
+  
+  // export async function getSingleDevice(slug: string) {
+  //   "use server";
+  //   const supabase = supabaseServerClient();
+  
+  //   try {
+  //     const { data: device, error } = await supabase
+  //       .from("sensitivity_device")
+  //       .select(`* , sensitivities(*)`)
+  //       .eq("slug", slug)
+  //       .single();
+  
+  //     if (error) {
+  //       throw error;
+  //     }
+  
+  //     return { device };
+  //   } catch (error) {
+  //     console.error(error);
+  //     throw error;
+  //   }
+  // }

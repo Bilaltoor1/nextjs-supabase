@@ -21,7 +21,7 @@ async function SensitivityCard({sensitivity_device} : any) {
                     <Card key={mobile}
                           className="xss:w-[320px] w-full h-[420px] p-0 dark:border-gray-500  bg-gray-700 rounded-md bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-40 border border-gray-100">
                         <CardHeader className='p-0'>
-                            <Image src={mobile?.thumbnail_url} alt="project" width={350} height={300}
+                            <Image src={mobile?.thumbnail_url} alt="project" width={350} height={300} priority
                                    className='w-full h-[250px]  object-cover rounded-t-lg'/>
                         </CardHeader>
                         <CardContent>
