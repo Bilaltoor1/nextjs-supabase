@@ -1,5 +1,5 @@
-'use client'
-import React, {Suspense, useEffect, useState} from 'react';
+'use client';
+import { useEffect, useState } from 'react';
 import {
     Table,
     TableBody,
@@ -18,17 +18,10 @@ import {
 import {Button} from "@/components/ui/button";
 import {MoreHorizontal} from "lucide-react";
 import {TrashIcon} from "@radix-ui/react-icons";
-
 import {createSupabaseBrowserClient} from "@/lib/supabase/BrowserClient";
 import {useParams, useRouter} from "next/navigation";
-import {
-    deleteSingleComment,
-    deleteSingleCommentFromGameAndApps,
-    getCommentsForGamesAndApps
-} from "@/lib/actions/GetSensitivities.action";
+import { deleteSingleCommentFromGameAndApps, getCommentsForGamesAndAppsForAdmin } from "@/lib/actions/GetSensitivities.action";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
-import GetCommentsLoading from "@/app/(admin)/components/DashboardMain/LoadingIndicator";
-import NoComment from "@/components/comments/NoComment";
 import LoadingIndicator from '@/app/(admin)/components/DashboardMain/LoadingIndicator';
 
 function page() {
@@ -39,7 +32,7 @@ function page() {
     const router = useRouter()
     const getCommentsHandler = async (slug: string) => {
         setLoading(true)
-        const {comments} = await getCommentsForGamesAndApps(slug, 10)
+        const {comments} = await getCommentsForGamesAndAppsForAdmin(slug, 10)
         // @ts-ignore
         setComments(comments)
         setLoading(false)

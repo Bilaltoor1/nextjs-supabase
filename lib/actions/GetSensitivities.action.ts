@@ -203,6 +203,34 @@ export async function getCommentsForGamesAndApps(
     throw error;
   }
 }
+export async function getCommentsForGamesAndAppsForAdmin(
+  slug: string,
+  limit: number = 5
+) {
+  "use server";
+  const supabase = supabaseServerClient();
+
+  try {
+    const { data: comments, error } = await supabase
+      .from("apps_comments")
+      .select("*")
+      .eq("post_slug", slug)
+      .order("created_at", { ascending: false })
+      .limit(limit);
+    const { count: totalComments } = await supabase
+      .from("comments")
+      .select("id", { count: "exact" })
+      .match({"post_slug": slug});
+    if (error) {
+      throw error;
+    }
+
+    return { comments, totalComments };
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
 export async function deleteSingleComment(id: string) {
   "use server";
   const supabase = supabaseServerClient();
@@ -254,6 +282,7 @@ export async function updateIsPublishedComments(
     if (error) {
       throw error;
     }
+    revalidatePath('/sensitivity/');
     return { comments };
   } catch (error) {
     console.error(error);
