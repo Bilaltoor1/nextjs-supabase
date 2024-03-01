@@ -1,4 +1,3 @@
-import SharedBackButton from "@/components/shared/sharedBackButton";
 import Image from "next/image";
 import moment from "moment";
 import {Badge} from "@/components/ui/badge";
@@ -17,6 +16,7 @@ export async function generateStaticParams() {
     
     return GamesAndApps
 }
+
 export async function generateMetadata({params}: { params: { slug: string }}): Promise<Metadata> {
     const data = await fetch(process.env.URL + `/api/create-apps/${params.slug}`,{
         method:'GET',
@@ -34,6 +34,7 @@ export async function generateMetadata({params}: { params: { slug: string }}): P
             title: app.title as string,
             description: app.description as string,
             type: "article",
+            siteName: "Gamify Store",
             url: process.env.url + `/games/${params.slug}`,
             images: [
                 {
@@ -49,6 +50,7 @@ export async function generateMetadata({params}: { params: { slug: string }}): P
             title: app.name as string,
             description: app.description as string,
         },
+        keywords: ["Gamify Store", "Pubg sensitivity", "pubgsensitivity"],
     };
 }
 async function Page({params}: { params: { slug: string } }) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../../../styles/loading.css'
 
-function GetCommentsLoading() {
+function LoadingIndicator({LoadingText = 'Loading'} : {LoadingText?: string}) {
 
     return (
         <div className='w-full h-screen flex items-center justify-center'>
@@ -35,7 +35,7 @@ function GetCommentsLoading() {
                         </g>
                     </g>
                 </svg>
-                <p className='font-bold text-[14px] font-spaceGrotesk mt-6'>Loading Comments</p>
+                <p className='font-bold text-[14px] font-spaceGrotesk mt-6 text-dark300_light700'>{LoadingText}</p>
             </main>
 
         </div>
@@ -43,4 +43,4 @@ function GetCommentsLoading() {
     );
 }
 
-export default GetCommentsLoading;
+export default LoadingIndicator;

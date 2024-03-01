@@ -27,8 +27,9 @@ import {
     getCommentsForGamesAndApps
 } from "@/lib/actions/GetSensitivities.action";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
-import GetCommentsLoading from "@/app/(admin)/components/DashboardMain/getCommentsLoading";
+import GetCommentsLoading from "@/app/(admin)/components/DashboardMain/LoadingIndicator";
 import NoComment from "@/components/comments/NoComment";
+import LoadingIndicator from '@/app/(admin)/components/DashboardMain/LoadingIndicator';
 
 function page() {
     const [comments, setComments] = useState([])
@@ -50,7 +51,7 @@ function page() {
     return (
         <div>
             {
-                loading ? <GetCommentsLoading/> :
+                loading ? <LoadingIndicator LoadingText='Loading Comments'/> :
 
                     <Table className='w-full overflow-x-scroll rounded border'>
                         <TableHeader>

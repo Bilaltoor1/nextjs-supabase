@@ -1,9 +1,12 @@
 "use client";
+import LoadingIndicator from "@/app/(admin)/components/DashboardMain/LoadingIndicator";
 import DownloadButton from "@/components/Games/downloadButton";
 import { Separator } from "@/components/ui/separator";
+import { Skeleton } from "@/components/ui/skeleton";
 import { getSingleGameAndApp } from "@/lib/actions/CreateGamesApps.action";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
+import LoadingSkeleton from "./LoadingSkeleton";
 
 export default function GamesContent({ slug }: { slug: string }) {
   const [app, setApp] = useState<any>({});
@@ -21,7 +24,7 @@ export default function GamesContent({ slug }: { slug: string }) {
   return (
     <>
       {loading ? (
-        <div>loading</div>
+       <LoadingSkeleton />
       ) : (
         <>
           <div className="mt-20">

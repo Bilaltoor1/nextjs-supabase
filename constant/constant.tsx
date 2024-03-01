@@ -6,7 +6,7 @@ export const sidebarLinks = [
         label: "Home",
     },
     {
-        imgURL: "/assets/icons/mobile.svg",
+        imgURL: "/assets/icons/pubg.svg",
         route: "/sensitivity",
         label: "PUBG Sensitivity",
     },
@@ -15,7 +15,7 @@ export const sidebarLinks = [
         route: "/games",
         label: "Games",
     },
-];
+   ];
 
 export const DashboardSidebarLinks = [
     {

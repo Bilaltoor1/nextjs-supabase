@@ -1,7 +1,7 @@
 import '../../styles/downloadButton.css';
 const DownloadButton = ({url, text}: { url: string, text: string }) => {
     return (
-        <button className="button" style={{ "--clr": "#ff7000" } as React.CSSProperties}>
+        <button className="button" style={{ "--clr": "#877EFF" } as React.CSSProperties}>
     <span className="button-decor"></span>
     <div className="button-content">
         <div className="button__icon">

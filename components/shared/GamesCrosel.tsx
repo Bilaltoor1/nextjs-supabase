@@ -34,7 +34,7 @@ export default function CarouselPlugin() {
                     [1, 2, 3, 4].map((i) => (
                         <CarouselItem key={i}>
                             <div className='w-full h-[300px] md:h-full relative'>
-                                <Image src='/banner.jpeg' alt='Banner Img' width={1920} height={300}
+                                <Image src='/banner.jpeg' alt='Banner Img' width={1920} height={300} 
                                        className='w-full h-full  object-cover absolute rounded-2xl  max-md:h-[300px]'/>
                             </div>
                         </CarouselItem>

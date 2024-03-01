@@ -1,15 +1,15 @@
 import React, {Suspense} from "react";
 import LocalSearch from "@/components/shared/LocalSearch";
 import Pagination from "@/components/pagination/pagination";
-import {getGamesAndApps} from "@/lib/actions/CreateGamesApps.action";
+import {getGamesAndAppsForAdmin} from "@/lib/actions/CreateGamesApps.action";
 import DataTableForGamesAndApps from "@/app/(admin)/components/DashboardMain/DataTableForGamesAndApps";
 
 export default async function Page({searchParams}: any) {
-    const {GamesAndApps, isNext} = await getGamesAndApps({
+    const {GamesAndApps, isNext} = await getGamesAndAppsForAdmin({
         filter: searchParams.filter,
         searchQuery: searchParams.q,
         page: searchParams.page ? +searchParams.page : 1,
-        pageSize: searchParams.pageSize ? +searchParams.pageSize : 9,
+        pageSize: searchParams.pageSize ? +searchParams.pageSize : 8,
     })
     return (
         <div className="space-y-5 overflow-x-hidden">

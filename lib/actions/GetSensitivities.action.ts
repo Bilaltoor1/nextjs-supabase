@@ -158,7 +158,7 @@ export async function getComments(slug: string, limit: number = 5) {
     const { data: comments, error } = await supabase
       .from("comments")
       .select("*")
-      .eq("post_slug", slug)
+      .match({"post_slug": slug , "is_published": true})
       .order("created_at", { ascending: false })
       .limit(limit);
     const { count: totalComments } = await supabase
@@ -192,7 +192,7 @@ export async function getCommentsForGamesAndApps(
     const { count: totalComments } = await supabase
       .from("comments")
       .select("id", { count: "exact" })
-      .eq("post_slug", slug);
+      .match({"post_slug": slug , "is_published": true});
     if (error) {
       throw error;
     }

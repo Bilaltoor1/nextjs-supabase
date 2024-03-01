@@ -24,7 +24,8 @@ import {createSupabaseBrowserClient} from "@/lib/supabase/BrowserClient";
 import {useParams, useRouter} from "next/navigation";
 import {deleteSingleComment, getComments} from "@/lib/actions/GetSensitivities.action";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
-import GetCommentsLoading from "@/app/(admin)/components/DashboardMain/getCommentsLoading";
+import GetCommentsLoading from "@/app/(admin)/components/DashboardMain/LoadingIndicator";
+import LoadingIndicator from '@/app/(admin)/components/DashboardMain/LoadingIndicator';
 
 function page() {
     const [comments, setComments] = useState([])
@@ -45,7 +46,7 @@ function page() {
     }, []);
     return (
         <div>
-            {loading ? <GetCommentsLoading/> :
+            {loading ? <LoadingIndicator LoadingText='Loading Comments'/> :
                 <Table className='w-full overflow-x-scroll rounded border'>
                     <TableHeader>
                         <TableRow>
